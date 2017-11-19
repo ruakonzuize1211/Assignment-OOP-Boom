@@ -25,8 +25,6 @@ public class putBomb : MonoBehaviour {
           //  Instantiate(Bomb2, new Vector2(Mathf.RoundToInt(transform.position.x)+0.5f, Mathf.RoundToInt(transform.position.y)+0.5f), Quaternion.identity); 
             Instantiate(Bomb2, transform.position, Quaternion.identity);
             timePassed = 0f;
-            
         }
-        
 	}
 }
