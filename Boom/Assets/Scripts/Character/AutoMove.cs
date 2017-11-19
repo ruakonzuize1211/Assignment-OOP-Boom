@@ -38,7 +38,7 @@ public class AutoMove : MonoBehaviour {
         hitUp = Physics2D.Raycast(rayUp.position, new Vector2(0, 1f), 0.1f);
         if (hitUp.collider != null)
         {
-            if (hitUp.collider.tag == "Obstacles" || hitUp.collider.tag == "zombie")
+            if (hitUp.collider.tag == "Obstacles" || hitUp.collider.tag == "zombie" || hitUp.collider.tag=="Rao")
                 stopUp = true;
             else
                 stopUp = false;
@@ -48,7 +48,7 @@ public class AutoMove : MonoBehaviour {
         hitUp1 = Physics2D.Raycast(rayUp1.position, new Vector2(0, 1f), 0.1f);
         if (hitUp1.collider != null)
         {
-            if (hitUp1.collider.tag == "Obstacles"  || hitUp1.collider.tag=="zombie")
+            if (hitUp1.collider.tag == "Obstacles" || hitUp1.collider.tag == "zombie" || hitUp1.collider.tag == "Rao")
                 stopUp1 = true;
             else
                 stopUp1 = false;
@@ -58,7 +58,7 @@ public class AutoMove : MonoBehaviour {
         hitUp2 = Physics2D.Raycast(rayUp2.position, new Vector2(0, 1f), 0.1f);
         if (hitUp2.collider != null)
         {
-            if (hitUp2.collider.tag == "Obstacles" || hitUp2.collider.tag == "zombie")
+            if (hitUp2.collider.tag == "Obstacles" || hitUp2.collider.tag == "zombie" || hitUp2.collider.tag == "Rao")
                 stopUp2 = true;
             else
                 stopUp2 = false;
@@ -69,7 +69,7 @@ public class AutoMove : MonoBehaviour {
         hitDown = Physics2D.Raycast(rayDown.position, new Vector2(0, -1f), 0.1f);
         if (hitDown.collider != null)
         {
-            if (hitDown.collider.tag == "Obstacles" || hitDown.collider.tag == "zombie")
+            if (hitDown.collider.tag == "Obstacles" || hitDown.collider.tag == "zombie" || hitDown.collider.tag == "Rao")
                 stopDown = true;
             else
                 stopDown = false;
@@ -79,7 +79,7 @@ public class AutoMove : MonoBehaviour {
         hitDown1 = Physics2D.Raycast(rayDown1.position, new Vector2(0, -1f), 0.1f);
         if (hitDown1.collider != null)
         {
-            if (hitDown1.collider.tag == "Obstacles" || hitDown1.collider.tag == "zombie")
+            if (hitDown1.collider.tag == "Obstacles" || hitDown1.collider.tag == "zombie" || hitDown1.collider.tag == "Rao")
                 stopDown1 = true;
             else
                 stopDown1 = false;
@@ -89,7 +89,7 @@ public class AutoMove : MonoBehaviour {
         hitDown2 = Physics2D.Raycast(rayDown2.position, new Vector2(0, -1f), 0.1f);
         if (hitDown2.collider != null)
         {
-            if (hitDown2.collider.tag == "Obstacles" || hitDown2.collider.tag == "zombie")
+            if (hitDown2.collider.tag == "Obstacles" || hitDown2.collider.tag == "zombie" || hitDown2.collider.tag == "Rao")
                 stopDown2 = true;
             else
                 stopDown2 = false;
@@ -100,7 +100,7 @@ public class AutoMove : MonoBehaviour {
         hitRight = Physics2D.Raycast(rayRight.position, new Vector2(1f, 0), 0.1f);
         if (hitRight.collider != null)
         {
-            if (hitRight.collider.tag == "Obstacles" || hitRight.collider.tag == "zombie")
+            if (hitRight.collider.tag == "Obstacles" || hitRight.collider.tag == "zombie" || hitRight.collider.tag == "Rao")
                 stopRight = true;
             else
                 stopRight = false;
@@ -110,7 +110,7 @@ public class AutoMove : MonoBehaviour {
         hitRight1 = Physics2D.Raycast(rayRight1.position, new Vector2(1f, 0), 0.5f);
         if (hitRight1.collider != null)
         {
-            if (hitRight1.collider.tag == "Obstacles" || hitRight1.collider.tag == "zombie")
+            if (hitRight1.collider.tag == "Obstacles" || hitRight1.collider.tag == "zombie" || hitRight1.collider.tag == "Rao")
                 stopRight1 = true;
             else
                 stopRight1 = false;
@@ -120,7 +120,7 @@ public class AutoMove : MonoBehaviour {
         hitRight2 = Physics2D.Raycast(rayRight2.position, new Vector2(1f, 0), 0.5f);
         if (hitRight2.collider != null)
         {
-            if (hitRight2.collider.tag == "Obstacles" || hitRight2.collider.tag == "zombie")
+            if (hitRight2.collider.tag == "Obstacles" || hitRight2.collider.tag == "zombie" || hitRight2.collider.tag == "Rao")
                 stopRight2 = true;
             else
                 stopRight2 = false;
@@ -132,7 +132,7 @@ public class AutoMove : MonoBehaviour {
         hitLeft = Physics2D.Raycast(rayLeft.position, new Vector2(-1f, 0), 0.1f);
         if (hitLeft.collider != null)
         {
-            if (hitLeft.collider.tag == "Obstacles" || hitLeft.collider.tag == "zombie")
+            if (hitLeft.collider.tag == "Obstacles" || hitLeft.collider.tag == "zombie" || hitLeft.collider.tag == "Rao")
                 stopLeft = true;
             else
                 stopLeft = false;
@@ -142,7 +142,7 @@ public class AutoMove : MonoBehaviour {
         hitLeft1 = Physics2D.Raycast(rayLeft1.position, new Vector2(-1f, 0), 0.5f);
         if (hitLeft1.collider != null)
         {
-            if (hitLeft1.collider.tag == "Obstacles" || hitLeft1.collider.tag == "zombie")
+            if (hitLeft1.collider.tag == "Obstacles" || hitLeft1.collider.tag == "zombie" || hitLeft1.collider.tag == "Rao")
                 stopLeft1 = true;
             else
                 stopLeft1 = false;
@@ -152,7 +152,7 @@ public class AutoMove : MonoBehaviour {
         hitLeft2 = Physics2D.Raycast(rayLeft2.position, new Vector2(-1f, 0), 0.5f);
         if (hitLeft2.collider != null)
         {
-            if (hitLeft2.collider.tag == "Obstacles" || hitLeft2.collider.tag == "zombie")
+            if (hitLeft2.collider.tag == "Obstacles" || hitLeft2.collider.tag == "zombie" || hitLeft2.collider.tag == "Rao")
                 stopLeft2 = true;
             else
                 stopLeft2 = false;

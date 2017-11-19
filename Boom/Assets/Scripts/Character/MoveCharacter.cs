@@ -61,7 +61,7 @@ public class MoveCharacter : MonoBehaviour {
         hitUp1 = Physics2D.Raycast(rayUp1.position, new Vector2(0, 1f), 0.1f);
         if (hitUp1.collider != null)
         {
-            if (hitUp1.collider.tag == "Obstacles" || hitUp1.collider.tag=="zombie")
+            if (hitUp1.collider.tag == "Obstacles" || hitUp1.collider.tag=="zombie" || hitUp1.collider.tag=="Rao")
                 stopUp1 = true;
             else
                 stopUp1 = false;
@@ -71,7 +71,7 @@ public class MoveCharacter : MonoBehaviour {
         hitUp2 = Physics2D.Raycast(rayUp2.position, new Vector2(0, 1f), 0.1f);
         if (hitUp2.collider != null)
         {
-            if (hitUp2.collider.tag == "Obstacles" || hitUp2.collider.tag == "zombie")
+            if (hitUp2.collider.tag == "Obstacles" || hitUp2.collider.tag == "zombie" || hitUp2.collider.tag == "Rao")
                 stopUp2 = true;
             else
                 stopUp2 = false;
@@ -82,7 +82,7 @@ public class MoveCharacter : MonoBehaviour {
         hitDown1 = Physics2D.Raycast(rayDown1.position, new Vector2(0, -1f), 0.1f);
         if (hitDown1.collider != null)
         {
-            if (hitDown1.collider.tag == "Obstacles" || hitDown1.collider.tag == "zombie")
+            if (hitDown1.collider.tag == "Obstacles" || hitDown1.collider.tag == "zombie" || hitDown1.collider.tag == "Rao")
                 stopDown1 = true;
             else
                 stopDown1 = false;
@@ -92,7 +92,7 @@ public class MoveCharacter : MonoBehaviour {
         hitDown2 = Physics2D.Raycast(rayDown2.position, new Vector2(0, -1f), 0.1f);
         if (hitDown2.collider != null)
         {
-            if (hitDown2.collider.tag == "Obstacles" || hitDown2.collider.tag == "zombie")
+            if (hitDown2.collider.tag == "Obstacles" || hitDown2.collider.tag == "zombie" || hitDown2.collider.tag == "Rao")
                 stopDown2 = true;
             else
                 stopDown2 = false;
@@ -103,7 +103,7 @@ public class MoveCharacter : MonoBehaviour {
         hitRight1 = Physics2D.Raycast(rayRight1.position,new Vector2(1f,0), 0.5f);
         if (hitRight1.collider != null)
         {
-            if (hitRight1.collider.tag == "Obstacles" || hitRight1.collider.tag == "zombie")
+            if (hitRight1.collider.tag == "Obstacles" || hitRight1.collider.tag == "zombie" || hitRight1.collider.tag == "Rao")
                 stopRight1 = true;
             else
                 stopRight1 = false;
@@ -113,7 +113,7 @@ public class MoveCharacter : MonoBehaviour {
         hitRight2 = Physics2D.Raycast(rayRight2.position, new Vector2(1f, 0), 0.5f);
         if (hitRight2.collider != null)
         {
-            if (hitRight2.collider.tag == "Obstacles" || hitRight2.collider.tag == "zombie")
+            if (hitRight2.collider.tag == "Obstacles" || hitRight2.collider.tag == "zombie" || hitRight2.collider.tag == "Rao")
                 stopRight2 = true;
             else
                 stopRight2 = false;
@@ -125,7 +125,7 @@ public class MoveCharacter : MonoBehaviour {
         hitLeft1 = Physics2D.Raycast(rayLeft1.position, new Vector2(-1f, 0), 0.5f);
         if (hitLeft1.collider != null)
         {
-            if (hitLeft1.collider.tag == "Obstacles" || hitLeft1.collider.tag == "zombie")
+            if (hitLeft1.collider.tag == "Obstacles" || hitLeft1.collider.tag == "zombie" || hitLeft1.collider.tag == "Rao")
                 stopLeft1 = true;
             else
                 stopLeft1 = false;
@@ -135,7 +135,7 @@ public class MoveCharacter : MonoBehaviour {
         hitLeft2 = Physics2D.Raycast(rayLeft2.position, new Vector2(-1f, 0), 0.5f);
         if (hitLeft2.collider != null)
         {
-            if (hitLeft2.collider.tag == "Obstacles" || hitLeft2.collider.tag == "zombie")
+            if (hitLeft2.collider.tag == "Obstacles" || hitLeft2.collider.tag == "zombie" || hitLeft2.collider.tag == "Rao")
                 stopLeft2 = true;
             else
                 stopLeft2 = false;
