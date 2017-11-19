@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Obstacles
   - zombie
+  - Rao
+  - Gift
   layers:
   - Default
   - TransparentFX
