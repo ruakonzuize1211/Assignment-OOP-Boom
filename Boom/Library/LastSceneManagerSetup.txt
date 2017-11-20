@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/SceMap1MultiPlayer.unity
+- path: Assets/Scenes/SceMap1.unity
   isLoaded: 1
   isActive: 1
