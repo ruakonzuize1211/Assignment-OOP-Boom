@@ -43,10 +43,17 @@ MonoBehaviour:
     width: 1366
     height: 645
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_MinSize: {x: 681, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
   controlID: 33
+=======
+  m_MinSize: {x: 681, y: 342}
+  m_MaxSize: {x: 12006, y: 8042}
+  vertical: 0
+  controlID: 45
+>>>>>>> parent of d5cd58e... Update scene MultiPlayer
 =======
   m_MinSize: {x: 681, y: 342}
   m_MaxSize: {x: 12006, y: 8042}
@@ -99,6 +106,9 @@ MonoBehaviour:
     height: 370
 =======
     height: 373
+<<<<<<< HEAD
+>>>>>>> parent of d5cd58e... Update scene MultiPlayer
+=======
 >>>>>>> parent of d5cd58e... Update scene MultiPlayer
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
@@ -125,15 +135,21 @@ MonoBehaviour:
     y: 370
     width: 1089
 <<<<<<< HEAD
+<<<<<<< HEAD
     height: 275
   m_MinSize: {x: 232, y: 271}
   m_MaxSize: {x: 10002, y: 10021}
   m_ActualView: {fileID: 13}
 =======
+=======
+>>>>>>> parent of d5cd58e... Update scene MultiPlayer
     height: 272
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
+<<<<<<< HEAD
+>>>>>>> parent of d5cd58e... Update scene MultiPlayer
+=======
 >>>>>>> parent of d5cd58e... Update scene MultiPlayer
   m_Panes:
   - {fileID: 13}
@@ -225,10 +241,17 @@ MonoBehaviour:
     width: 1089
     height: 645
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_MinSize: {x: 404, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
   controlID: 34
+=======
+  m_MinSize: {x: 406, y: 342}
+  m_MaxSize: {x: 8006, y: 8042}
+  vertical: 1
+  controlID: 46
+>>>>>>> parent of d5cd58e... Update scene MultiPlayer
 =======
   m_MinSize: {x: 406, y: 342}
   m_MaxSize: {x: 8006, y: 8042}
@@ -259,7 +282,11 @@ MonoBehaviour:
   m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   controlID: 35
+=======
+  controlID: 47
+>>>>>>> parent of d5cd58e... Update scene MultiPlayer
 =======
   controlID: 47
 >>>>>>> parent of d5cd58e... Update scene MultiPlayer
@@ -354,6 +381,7 @@ MonoBehaviour:
     m_SearchArea: 0
     m_Folders:
 <<<<<<< HEAD
+<<<<<<< HEAD
     - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 52
@@ -366,20 +394,33 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Scripts/Bomb
 >>>>>>> parent of d5cd58e... Update scene MultiPlayer
+=======
+    - Assets/Scripts/Bomb
+  m_ViewMode: 1
+  m_StartGridSize: 52
+  m_LastFolders:
+  - Assets/Scripts/Bomb
+>>>>>>> parent of d5cd58e... Update scene MultiPlayer
   m_LastFoldersGridSize: 52
   m_LastProjectPath: E:\Github\Assignment-OOP-Boom\Boom
   m_IsLocked: 0
   m_FolderTreeState:
+<<<<<<< HEAD
 <<<<<<< HEAD
     scrollPos: {x: 0, y: 111}
     m_SelectedIDs: c2290000
     m_LastClickedID: 10690
     m_ExpandedIDs: 000000002629000048290000aa290000c2290000362f0000382f000000ca9a3bffffff7f
 =======
+=======
+>>>>>>> parent of d5cd58e... Update scene MultiPlayer
     scrollPos: {x: 0, y: 175}
     m_SelectedIDs: 042b0000
     m_LastClickedID: 11012
     m_ExpandedIDs: 000000006e2a0000922a0000f42a00000c2b00007e3000008030000000ca9a3bffffff7f
+<<<<<<< HEAD
+>>>>>>> parent of d5cd58e... Update scene MultiPlayer
+=======
 >>>>>>> parent of d5cd58e... Update scene MultiPlayer
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -409,7 +450,11 @@ MonoBehaviour:
     m_SelectedIDs: 
     m_LastClickedID: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_ExpandedIDs: 000000002629000048290000aa290000c2290000362f0000382f0000
+=======
+    m_ExpandedIDs: 000000006e2a0000922a0000f42a00000c2b00007e30000080300000
+>>>>>>> parent of d5cd58e... Update scene MultiPlayer
 =======
     m_ExpandedIDs: 000000006e2a0000922a0000f42a00000c2b00007e30000080300000
 >>>>>>> parent of d5cd58e... Update scene MultiPlayer
@@ -528,15 +573,21 @@ MonoBehaviour:
     height: 349
   m_TreeViewState:
 <<<<<<< HEAD
+<<<<<<< HEAD
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
     m_ExpandedIDs: 0aecffff58f3ffff00000000
 =======
+=======
+>>>>>>> parent of d5cd58e... Update scene MultiPlayer
     scrollPos: {x: 0, y: 449}
     m_SelectedIDs: 
     m_LastClickedID: 0
     m_ExpandedIDs: fa95feffde98feff4af3ffff00000000782c00006c2d00009a2d00000e2e0000bc5c0000a85d0000d65d0000045e0000
+<<<<<<< HEAD
+>>>>>>> parent of d5cd58e... Update scene MultiPlayer
+=======
 >>>>>>> parent of d5cd58e... Update scene MultiPlayer
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -593,9 +644,15 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_Position:
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Target: {x: -1.56, y: -1.47, z: 0.17857364}
     speed: 2
     m_Value: {x: -1.56, y: -1.47, z: 0.17857364}
+=======
+    m_Target: {x: 0.14649902, y: -0.15456784, z: 0}
+    speed: 2
+    m_Value: {x: 0.14649902, y: -0.15456784, z: 0}
+>>>>>>> parent of d5cd58e... Update scene MultiPlayer
 =======
     m_Target: {x: 0.14649902, y: -0.15456784, z: 0}
     speed: 2
@@ -628,9 +685,15 @@ MonoBehaviour:
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Target: 11.503564
     speed: 2
     m_Value: 11.503564
+=======
+    m_Target: 12.091551
+    speed: 2
+    m_Value: 12.091551
+>>>>>>> parent of d5cd58e... Update scene MultiPlayer
 =======
     m_Target: 12.091551
     speed: 2
