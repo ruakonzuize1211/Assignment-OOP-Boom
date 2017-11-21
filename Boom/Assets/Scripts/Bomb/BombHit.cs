@@ -11,7 +11,7 @@ public class BombHit : MonoBehaviour {
     const float TIME_TO_WAIT = 3f;
     float timeWaitPassed = 0;
     bool bWaiting = false;
-    public int rangeofBoom = 2;
+    public int rangeofBoom = 1;
 	// Use this for initialization
 	void Start () {
         bWaiting = true;
@@ -104,27 +104,56 @@ public class BombHit : MonoBehaviour {
                     {
                         GameObject obj1 = Instantiate(explosionPrefab, new Vector2(transform.position.x, transform.position.y - i), Quaternion.identity) as GameObject;
                         Destroy(obj1, 0.5f);
+                        if (hitdown.transform.tag == "Player")
+                        {
+                            hitdown.transform.GetComponent<player>().playerisHitted();
+                        }
+                        if (hitdown.collider.tag == "zombie")
+                        {
+                            hitdown.transform.GetComponent<zombie>().zombieDie();
+                        }
                         //    Destroy(hitdown.collider);
                     }
                     if (hitup.transform != null && (hitup.transform.tag == "Player" || hitup.transform.tag == "zombie" || hitup.transform.tag == "Gift"))
                     {
                         GameObject obj1 = Instantiate(explosionPrefab, new Vector2(transform.position.x, transform.position.y + i), Quaternion.identity) as GameObject;
                         Destroy(obj1, 0.5f);
-                        //     Destroy(hitup.collider);
+                        if (hitup.transform.tag == "Player")
+                        {
+                            hitup.transform.GetComponent<player>().playerisHitted();
+                        }
+                        if (hitup.collider.tag == "zombie")
+                        {
+                            hitup.transform.GetComponent<zombie>().zombieDie();
+                        }
 
                     }
                     if (hitright.transform != null && (hitright.transform.tag == "Player" || hitright.transform.tag == "zombie" || hitright.transform.tag == "Gift"))
                     {
                         GameObject obj1 = Instantiate(explosionPrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity) as GameObject;
                         Destroy(obj1, 0.5f);
-                        //   Destroy(hitright.collider);
+                        if (hitright.transform.tag == "Player")
+                        {
+                            hitright.transform.GetComponent<player>().playerisHitted();
+                        }
+                        if (hitright.collider.tag == "zombie")
+                        {
+                            hitright.transform.GetComponent<zombie>().zombieDie();
+                        }
 
                     }
                     if (hitleft.transform!=null && (hitleft.transform.tag == "Player" || hitleft.transform.tag == "zombie" || hitleft.transform.tag == "Gift"))
                     {
                         GameObject obj1 = Instantiate(explosionPrefab, new Vector2(transform.position.x - i, transform.position.y), Quaternion.identity) as GameObject;
                         Destroy(obj1, 0.5f);
-                        // Destroy(hitleft.collider);
+                        if (hitleft.transform.tag == "Player")
+                        {
+                            hitleft.transform.GetComponent<player>().playerisHitted();
+                        }
+                        if (hitleft.collider.tag == "zombie")
+                        {
+                            hitleft.transform.GetComponent<zombie>().zombieDie();
+                        }
 
                     }
                 }

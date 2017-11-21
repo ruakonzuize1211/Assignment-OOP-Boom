@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutoMove : MonoBehaviour {
+public class zombie : MonoBehaviour {
     public int countTime;
     public GameObject mainPlayer;
     public enum direction { up, right, down, left,multidir };
@@ -11,8 +11,10 @@ public class AutoMove : MonoBehaviour {
     public float speed;
     public bool stopUp, stopUp1, stopUp2, stopDown, stopDown1, stopDown2, stopRight, stopRight1, stopRight2, stopLeft, stopLeft1, stopLeft2;
     Transform rayUp1, rayRight1, rayDown1, rayLeft1, rayUp2, rayLeft2, rayDown2, rayRight2, rayUp, rayRight, rayDown, rayLeft;
+    GameObject controller;
     // Use this for initialization
     void Start () {
+        controller = GameObject.Find("GameController");
         countTime = 0;
         mainPlayer = GameObject.FindGameObjectWithTag("Player");
         lastDirection = direction.up;
@@ -296,5 +298,10 @@ public class AutoMove : MonoBehaviour {
                 lastDirection = direction.down;
             }
         }
+    }
+    public void zombieDie()
+    {
+        Destroy(gameObject);
+        controller.GetComponent<GameController>().zombieDie();
     }
 }

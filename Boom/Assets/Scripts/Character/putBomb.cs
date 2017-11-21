@@ -7,22 +7,24 @@ public class putBomb : MonoBehaviour {
     public GameObject Bomb2;
     public float keyDelay = 1f;
     private float timePassed = 0f;
+    GameObject gameController;
+    bool isBossactive;
     public static GameObject findobject;
 	// Use this for initialization
 	void Start () {
-//        put = false;
+        //        put = false;
+        gameController = GameObject.Find("GameController");
 	}
 	
 	// Update is called once per frame
 	void Update () {
         timePassed += Time.deltaTime;
 
-        findobject = GameObject.Find("bomb2(Clone)");
+        findobject = GameObject.Find("boom(Clone)");
 
-        if (Input.GetKey("space") && timePassed >= keyDelay&&findobject==null)
+        if (Input.GetKey("space") && (timePassed >= keyDelay && findobject == null))
         {
-        //    put = true;
-          //  Instantiate(Bomb2, new Vector2(Mathf.RoundToInt(transform.position.x)+0.5f, Mathf.RoundToInt(transform.position.y)+0.5f), Quaternion.identity); 
+            //  Instantiate(Bomb2, new Vector2(Mathf.RoundToInt(transform.position.x)+0.5f, Mathf.RoundToInt(transform.position.y)+0.5f), Quaternion.identity); 
             Instantiate(Bomb2, transform.position, Quaternion.identity);
             timePassed = 0f;
         }

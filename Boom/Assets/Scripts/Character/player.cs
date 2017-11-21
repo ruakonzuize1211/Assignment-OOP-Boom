@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class MoveCharacter : MonoBehaviour {
+public class player : MonoBehaviour {
+    public int numberofHeart;
     RaycastHit2D hitUp, hitUp1, hitUp2, hitDown, hitDown1, hitDown2, hitLeft, hitLeft1, hitLeft2, hitRight, hitRight1, hitRight2;
     public float speed;
     public bool stopUp1, stopDown1, stopRight1, stopLeft1, stopUp2, stopDown2, stopRight2, stopLeft2;
     public bool ishitZombieup, ishitZombiedown, ishitZombieleft, ishitZombieright;
     Transform rayUp1, rayRight1, rayDown1, rayLeft1, rayUp2, rayLeft2, rayDown2, rayRight2, rayUp, rayDown, rayLeft, rayRight;
     void Start () {
+        numberofHeart = 3;
         speed = 2f;
         rayUp1 = transform.Find("rayUp1");
         rayRight1 = transform.Find("rayRight1");
@@ -181,5 +183,11 @@ public class MoveCharacter : MonoBehaviour {
     void playerDie()
     {
         Debug.Log("die cause zombie hits");
+    }
+    public void playerisHitted()
+    {
+        --numberofHeart;
+        if (numberofHeart == 0)
+            playerDie();
     }
 }
