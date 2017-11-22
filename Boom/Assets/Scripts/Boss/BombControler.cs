@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BombControler : MonoBehaviour {
-    public float moveSpeed = 5;
+    public bool throwbyBoss = false;
     public Vector3 target;
-    public bool boomfromBoss = false;
+    public float moveSpeed = 5;
 	// Use this for initialization
 	void Start () {
 		
@@ -13,7 +13,7 @@ public class BombControler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (boomfromBoss)
-            transform.Translate((transform.position - target) * moveSpeed * Time.deltaTime * -1); //Xác định vị trí của nhân vật để ném bom
-    }
+        if (throwbyBoss)
+            transform.Translate((transform.position - target) * moveSpeed * Time.deltaTime * -1);//Xác định vị trí của nhân vật để ném bom
+	}
 }

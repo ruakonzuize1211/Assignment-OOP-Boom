@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BossHealth : MonoBehaviour {
 
-    public float maxHealth;
+    public float maxHealth=100;
     float currHealth;
     public Slider BossHealthSlider;//Thanh máu UI
 	// Use this for initialization

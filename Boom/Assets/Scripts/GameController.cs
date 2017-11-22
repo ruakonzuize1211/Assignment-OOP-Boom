@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
     public bool bossActive = false;
-    public int numbersZombie;
+    public int numbersZombie = 1;
 	// Use this for initialization
 	void Start () {
         numbersZombie = 1;
@@ -27,8 +27,12 @@ public class GameController : MonoBehaviour {
         --numbersZombie;
         if(numbersZombie<=0)
         {
-            bossActive = true;
-            destroyallObstacles();
+            bossCome();
         }
+    }
+    void bossCome()
+    {
+        bossActive = true;
+        destroyallObstacles();
     }
 }

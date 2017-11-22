@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class zombie : MonoBehaviour {
     public int countTime;
-    public GameObject mainPlayer;
+    public GameObject mainPlayer, controller;
     public enum direction { up, right, down, left,multidir };
-    RaycastHit2D hitUp, hitUp1, hitUp2, hitDown, hitDown1, hitDown2, hitLeft, hitLeft1, hitLeft2, hitRight, hitRight1, hitRight2;
     direction lastDirection, repeatDirection;
     public float speed;
     public bool stopUp, stopUp1, stopUp2, stopDown, stopDown1, stopDown2, stopRight, stopRight1, stopRight2, stopLeft, stopLeft1, stopLeft2;
     Transform rayUp1, rayRight1, rayDown1, rayLeft1, rayUp2, rayLeft2, rayDown2, rayRight2, rayUp, rayRight, rayDown, rayLeft;
-    GameObject controller;
+    RaycastHit2D hitUp, hitUp1, hitUp2, hitDown, hitDown1, hitDown2, hitLeft, hitLeft1, hitLeft2, hitRight, hitRight1, hitRight2;
     // Use this for initialization
     void Start () {
-        controller = GameObject.Find("GameController");
         countTime = 0;
         mainPlayer = GameObject.FindGameObjectWithTag("Player");
+        controller = GameObject.Find("GameController");
         lastDirection = direction.up;
         repeatDirection = direction.multidir;
         speed = 1.5f;
@@ -40,7 +39,7 @@ public class zombie : MonoBehaviour {
         hitUp = Physics2D.Raycast(rayUp.position, new Vector2(0, 1f), 0.1f);
         if (hitUp.collider != null)
         {
-            if (hitUp.collider.tag == "Obstacles" || hitUp.collider.tag == "zombie" || hitUp.collider.tag=="Rao")
+            if (hitUp.collider.tag == "Obstacles" || hitUp.collider.tag == "zombie" || hitUp.collider.tag == "Rao" || hitUp.collider.tag == "boss")
                 stopUp = true;
             else
                 stopUp = false;
@@ -50,7 +49,7 @@ public class zombie : MonoBehaviour {
         hitUp1 = Physics2D.Raycast(rayUp1.position, new Vector2(0, 1f), 0.1f);
         if (hitUp1.collider != null)
         {
-            if (hitUp1.collider.tag == "Obstacles" || hitUp1.collider.tag == "zombie" || hitUp1.collider.tag == "Rao")
+            if (hitUp1.collider.tag == "Obstacles" || hitUp1.collider.tag == "zombie" || hitUp1.collider.tag == "Rao" || hitUp1.collider.tag == "boss")
                 stopUp1 = true;
             else
                 stopUp1 = false;
@@ -60,18 +59,19 @@ public class zombie : MonoBehaviour {
         hitUp2 = Physics2D.Raycast(rayUp2.position, new Vector2(0, 1f), 0.1f);
         if (hitUp2.collider != null)
         {
-            if (hitUp2.collider.tag == "Obstacles" || hitUp2.collider.tag == "zombie" || hitUp2.collider.tag == "Rao")
+            if (hitUp2.collider.tag == "Obstacles" || hitUp2.collider.tag == "zombie" || hitUp2.collider.tag == "Rao" || hitUp2.collider.tag == "boss")
                 stopUp2 = true;
             else
                 stopUp2 = false;
         }
         else
             stopUp2 = false;
+
         //MoveDown
         hitDown = Physics2D.Raycast(rayDown.position, new Vector2(0, -1f), 0.1f);
         if (hitDown.collider != null)
         {
-            if (hitDown.collider.tag == "Obstacles" || hitDown.collider.tag == "zombie" || hitDown.collider.tag == "Rao")
+            if (hitDown.collider.tag == "Obstacles" || hitDown.collider.tag == "zombie" || hitDown.collider.tag == "Rao" || hitDown.collider.tag == "boss")
                 stopDown = true;
             else
                 stopDown = false;
@@ -81,7 +81,7 @@ public class zombie : MonoBehaviour {
         hitDown1 = Physics2D.Raycast(rayDown1.position, new Vector2(0, -1f), 0.1f);
         if (hitDown1.collider != null)
         {
-            if (hitDown1.collider.tag == "Obstacles" || hitDown1.collider.tag == "zombie" || hitDown1.collider.tag == "Rao")
+            if (hitDown1.collider.tag == "Obstacles" || hitDown1.collider.tag == "zombie" || hitDown1.collider.tag == "Rao" || hitDown1.collider.tag == "boss")
                 stopDown1 = true;
             else
                 stopDown1 = false;
@@ -91,18 +91,19 @@ public class zombie : MonoBehaviour {
         hitDown2 = Physics2D.Raycast(rayDown2.position, new Vector2(0, -1f), 0.1f);
         if (hitDown2.collider != null)
         {
-            if (hitDown2.collider.tag == "Obstacles" || hitDown2.collider.tag == "zombie" || hitDown2.collider.tag == "Rao")
+            if (hitDown2.collider.tag == "Obstacles" || hitDown2.collider.tag == "zombie" || hitDown2.collider.tag == "Rao" || hitDown2.collider.tag == "boss")
                 stopDown2 = true;
             else
                 stopDown2 = false;
         }
         else
             stopDown2 = false;
+
         //Move Right
         hitRight = Physics2D.Raycast(rayRight.position, new Vector2(1f, 0), 0.1f);
         if (hitRight.collider != null)
         {
-            if (hitRight.collider.tag == "Obstacles" || hitRight.collider.tag == "zombie" || hitRight.collider.tag == "Rao")
+            if (hitRight.collider.tag == "Obstacles" || hitRight.collider.tag == "zombie" || hitRight.collider.tag == "Rao" || hitRight.collider.tag == "boss")
                 stopRight = true;
             else
                 stopRight = false;
@@ -112,7 +113,7 @@ public class zombie : MonoBehaviour {
         hitRight1 = Physics2D.Raycast(rayRight1.position, new Vector2(1f, 0), 0.5f);
         if (hitRight1.collider != null)
         {
-            if (hitRight1.collider.tag == "Obstacles" || hitRight1.collider.tag == "zombie" || hitRight1.collider.tag == "Rao")
+            if (hitRight1.collider.tag == "Obstacles" || hitRight1.collider.tag == "zombie" || hitRight1.collider.tag == "Rao" || hitRight1.collider.tag == "boss")
                 stopRight1 = true;
             else
                 stopRight1 = false;
@@ -122,7 +123,7 @@ public class zombie : MonoBehaviour {
         hitRight2 = Physics2D.Raycast(rayRight2.position, new Vector2(1f, 0), 0.5f);
         if (hitRight2.collider != null)
         {
-            if (hitRight2.collider.tag == "Obstacles" || hitRight2.collider.tag == "zombie" || hitRight2.collider.tag == "Rao")
+            if (hitRight2.collider.tag == "Obstacles" || hitRight2.collider.tag == "zombie" || hitRight2.collider.tag == "Rao" || hitRight2.collider.tag == "boss")
                 stopRight2 = true;
             else
                 stopRight2 = false;
@@ -134,7 +135,7 @@ public class zombie : MonoBehaviour {
         hitLeft = Physics2D.Raycast(rayLeft.position, new Vector2(-1f, 0), 0.1f);
         if (hitLeft.collider != null)
         {
-            if (hitLeft.collider.tag == "Obstacles" || hitLeft.collider.tag == "zombie" || hitLeft.collider.tag == "Rao")
+            if (hitLeft.collider.tag == "Obstacles" || hitLeft.collider.tag == "zombie" || hitLeft.collider.tag == "Rao" || hitLeft.collider.tag == "boss")
                 stopLeft = true;
             else
                 stopLeft = false;
@@ -144,7 +145,7 @@ public class zombie : MonoBehaviour {
         hitLeft1 = Physics2D.Raycast(rayLeft1.position, new Vector2(-1f, 0), 0.5f);
         if (hitLeft1.collider != null)
         {
-            if (hitLeft1.collider.tag == "Obstacles" || hitLeft1.collider.tag == "zombie" || hitLeft1.collider.tag == "Rao")
+            if (hitLeft1.collider.tag == "Obstacles" || hitLeft1.collider.tag == "zombie" || hitLeft1.collider.tag == "Rao" || hitLeft1.collider.tag == "boss")
                 stopLeft1 = true;
             else
                 stopLeft1 = false;
@@ -154,7 +155,7 @@ public class zombie : MonoBehaviour {
         hitLeft2 = Physics2D.Raycast(rayLeft2.position, new Vector2(-1f, 0), 0.5f);
         if (hitLeft2.collider != null)
         {
-            if (hitLeft2.collider.tag == "Obstacles" || hitLeft2.collider.tag == "zombie" || hitLeft2.collider.tag == "Rao")
+            if (hitLeft2.collider.tag == "Obstacles" || hitLeft2.collider.tag == "zombie" || hitLeft2.collider.tag == "Rao" || hitLeft2.collider.tag == "boss")
                 stopLeft2 = true;
             else
                 stopLeft2 = false;
@@ -301,7 +302,7 @@ public class zombie : MonoBehaviour {
     }
     public void zombieDie()
     {
-        Destroy(gameObject);
         controller.GetComponent<GameController>().zombieDie();
+        Destroy(gameObject);
     }
 }

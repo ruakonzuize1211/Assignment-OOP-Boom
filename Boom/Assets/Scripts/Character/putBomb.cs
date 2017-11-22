@@ -3,29 +3,115 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class putBomb : MonoBehaviour {
- //   public float destroyTime = 5f;
+    //   public float destroyTime = 5f;
+    GameObject gameController;
     public GameObject Bomb2;
     public float keyDelay = 1f;
     private float timePassed = 0f;
-    GameObject gameController;
-    bool isBossactive;
     public static GameObject findobject;
-	// Use this for initialization
-	void Start () {
-        //        put = false;
+    private float x1, x2, y1, y2, subx, suby;
+    bool isBossactive;
+    public bool isMultiboom = false;
+    // Use this for initialization
+
+
+
+    void Start () {
         gameController = GameObject.Find("GameController");
+        subx = transform.position.x - (float)Mathf.RoundToInt(transform.position.x);//>0 khi toa do lam tron nho hon
+        suby = transform.position.y - (float)Mathf.RoundToInt(transform.position.y);
+        x1 = Mathf.RoundToInt(transform.position.x) + 0.5f;
+        x2 = Mathf.RoundToInt(transform.position.x) - 0.5f;
+        y1 = Mathf.RoundToInt(transform.position.y) + 0.5f;
+        y2 = Mathf.RoundToInt(transform.position.y) - 0.5f;
+         
 	}
-	
+    void FixedUpdated()
+    {
+      
+     
+        
+         
+    }
+   
 	// Update is called once per frame
 	void Update () {
+        isMultiboom = gameObject.GetComponentInParent<player>().isMultiboom;
         timePassed += Time.deltaTime;
 
         findobject = GameObject.Find("boom(Clone)");
 
-        if (Input.GetKey("space") && (timePassed >= keyDelay && findobject == null))
+        if (Input.GetKey("space") && ((timePassed >= keyDelay && findobject == null) || (isMultiboom == true && timePassed >= keyDelay)))
         {
-            //  Instantiate(Bomb2, new Vector2(Mathf.RoundToInt(transform.position.x)+0.5f, Mathf.RoundToInt(transform.position.y)+0.5f), Quaternion.identity); 
-            Instantiate(Bomb2, transform.position, Quaternion.identity);
+            subx = transform.position.x - (float)Mathf.RoundToInt(transform.position.x);//>0 khi toa do lam tron nho hon
+            suby = transform.position.y - (float)Mathf.RoundToInt(transform.position.y);
+            x1 = Mathf.RoundToInt(transform.position.x) + 0.5f;
+            x2 = Mathf.RoundToInt(transform.position.x) - 0.5f;
+            y1 = Mathf.RoundToInt(transform.position.y) + 0.5f;
+            y2 = Mathf.RoundToInt(transform.position.y) - 0.5f;
+         
+            if (transform.position.x>0.0f&&subx == 0.5f && suby == 0.5f&&transform.position.y>0.0f)
+            {
+                Instantiate(Bomb2, transform.position, Quaternion.identity);
+            }
+            if (transform.position.x > 0.0f && subx > 0.0f && suby > 0.0f && transform.position.y > 0.0f)
+                {
+                    Instantiate(Bomb2, new Vector2(x1, y1), Quaternion.identity);
+                }
+            if (transform.position.x > 0.0f && subx > 0.0f && suby < 0.0f && transform.position.y > 0.0f)
+                {
+                    Instantiate(Bomb2, new Vector2(x1, y2), Quaternion.identity);
+                }
+            if (transform.position.x > 0.0f && subx < 0.0f && suby < 0.0f && transform.position.y > 0.0f)
+                {
+                    Instantiate(Bomb2, new Vector2(x2, y2), Quaternion.identity);
+                }
+            if (transform.position.x > 0.0f && subx < 0.0f && suby > 0.0f && transform.position.y > 0.0f)
+                {
+                    Instantiate(Bomb2, new Vector2(x2, y1), Quaternion.identity);
+                }
+            ///////////////////////////////////////////////////////////////////////////////////////////
+            if (transform.position.x < 0.0f && subx < 0.0f && suby < 0.0f && transform.position.y < 0.0f)
+            {
+                Instantiate(Bomb2, new Vector2(x2, y2), Quaternion.identity);
+            }
+            if (transform.position.x < 0.0f && subx < 0.0f && suby > 0.0f && transform.position.y < 0.0f)
+            {
+                Instantiate(Bomb2, new Vector2(x2, y1), Quaternion.identity);
+            }
+            if (transform.position.x < 0.0f && subx > 0.0f && suby > 0.0f && transform.position.y < 0.0f)
+            {
+                Instantiate(Bomb2, new Vector2(x1, y1), Quaternion.identity);
+            }
+            if (transform.position.x < 0.0f && subx > 0.0f && suby < 0.0f && transform.position.y < 0.0f)
+            {
+                Instantiate(Bomb2, new Vector2(x1, y2), Quaternion.identity);
+                Debug.Log("ok");
+            }
+            /////////////////////////////////////////////////////////////////////////////////////////
+            if (transform.position.x < 0.0f && subx < 0.0f && suby > 0.0f && transform.position.y > 0.0f)
+            {
+                Instantiate(Bomb2, new Vector2(x2, y1), Quaternion.identity);
+            }
+            if (transform.position.x < 0.0f && subx < 0.0f && suby < 0.0f && transform.position.y > 0.0f)
+            {
+                Instantiate(Bomb2, new Vector2(x2, y2), Quaternion.identity);
+            }
+            if (transform.position.x > 0.0f && subx > 0.0f && suby > 0.0f && transform.position.y < 0.0f)
+            {
+                Instantiate(Bomb2, new Vector2(x1, y1), Quaternion.identity);
+            }
+            if (transform.position.x > 0.0f && subx < 0.0f && suby < 0.0f && transform.position.y < 0.0f)
+            {
+                Instantiate(Bomb2, new Vector2(x2, y2), Quaternion.identity);
+                Debug.Log("ok");
+            }
+            //////////////////////////////////////////////
+            if (transform.position.x > 0.0f && subx > 0.0f && suby < 0.0f && transform.position.y < 0.0f)
+            {
+                Instantiate(Bomb2, new Vector2(x1, y2), Quaternion.identity);
+                Debug.Log("ok");
+            }
             timePassed = 0f;
         }
 	}

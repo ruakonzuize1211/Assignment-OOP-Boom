@@ -17,3 +17,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AboutMode 1.unity
     guid: 7e3881c740bb0db4bb8da88d2d0db065
+  - enabled: 1
+    path: Assets/Scenes/SceMap1.unity
+    guid: d764a610585db274b8a6fe17a6dccf96
+  - enabled: 1
+    path: Assets/Scenes/SceMap2.unity
+    guid: 56c3d0d36f873e74a832fd0a28eba98b
+  - enabled: 1
+    path: Assets/Scenes/PauseMenu.unity
+    guid: 5f2e28115b54a244686ea1845b3b757d
+  - enabled: 1
+    path: Assets/Scenes/StoryMode.unity
+    guid: 00000000000000000000000000000000

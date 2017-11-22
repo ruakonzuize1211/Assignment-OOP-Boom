@@ -22,6 +22,25 @@ public class Button : MonoBehaviour
             SceneManager.LoadScene("game");
 
         }
+        if (bt == Button.ButtonType.btnStory)
+        {
+            SoundController.PlaySound(soundsGame.play);
+            SceneManager.LoadScene("StoryMode");
+
+        }
+        if (bt == Button.ButtonType.btnVS)
+        {
+            SoundController.PlaySound(soundsGame.play);
+            SceneManager.LoadScene("StoryMode");
+
+        }
+        if (bt == Button.ButtonType.btnLoad)
+        {
+            SoundController.PlaySound(soundsGame.play);
+            SceneManager.LoadScene(PlayerPrefs.GetString("currentlevel"));
+            Time.timeScale = 1.0f;
+
+        }
     }
     // Use this for initialization
     void Start()
@@ -38,7 +57,8 @@ public class Button : MonoBehaviour
     {
         btnStory,
         btnVS,
-        btnBack
+        btnBack,
+        btnLoad,
 
     }
 }
