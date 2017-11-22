@@ -27,8 +27,8 @@ public class BossController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Flip();
-        if (Time.time >= lastBombTime + bombTime - throughBombTime)
-        { 
+        if (Time.time >= lastBombTime + bombTime-throughBombTime)
+        {
             anim.SetBool("isBomb", true);
         }
         if (Time.time >= lastBombTime + bombTime)
@@ -55,25 +55,30 @@ public class BossController : MonoBehaviour {
     void Flip()
     {
         //Xoay hướng trái
-        if(Bomber.transform.position.x<-4.5&&Bomber.transform.position.y<=3&& Bomber.transform.position.y >= -1.5)
+        if(Bomber.transform.position.x<-2.5&&Bomber.transform.position.y<=3&& Bomber.transform.position.y >= -1)
         {
-            anim.SetBool("isLeft", true);
             anim.SetBool("isUp", false);
+            anim.SetBool("isDown", false);
             anim.SetBool("isRight", false);
+            anim.SetBool("isLeft", true);
         }
         //Xoay hướng phải
-        else if (Bomber.transform.position.x > 4.5 && Bomber.transform.position.y <= 3 && Bomber.transform.position.y >= -1.5)
+        else if (Bomber.transform.position.x > 2.5 && Bomber.transform.position.y <= 3 && Bomber.transform.position.y >= -1)
         {
-            anim.SetBool("isRight", true);
             anim.SetBool("isUp", false);
+            anim.SetBool("isDown", false);
             anim.SetBool("isLeft", false);
+            anim.SetBool("isRight", true);
+         
         }
         //Xoay hướng lên
-        else if(Bomber.transform.position.y > 3 && Bomber.transform.position.x < 3.5 && Bomber.transform.position.x > -3.5)
+        else if(Bomber.transform.position.y > 3)
         {
-            anim.SetBool("isUp", true);
             anim.SetBool("isLeft", false);
+            anim.SetBool("isDown", false);
             anim.SetBool("isRight", false);
+            anim.SetBool("isUp", true);
+        
         }
         //Xoay hướng xuống( hướng mặt định)
         else
@@ -81,7 +86,7 @@ public class BossController : MonoBehaviour {
             anim.SetBool("isUp", false);
             anim.SetBool("isLeft", false);
             anim.SetBool("isRight", false);
+            anim.SetBool("isDown", true);
         }
-       
     }
 }
