@@ -1,8 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public class player : MonoBehaviour {
+    public Text LifeTxt;
+    public Text BSizeTxt;
+    public Text ShoeTxt;
+    public Text BombTxt;
     public int nummberofHeart = 3;
+    public int BSize = 0;
+    public int Shoe = 0;
+    public int Bomb = 0;
     public bool isMultiboom = false;
     bool stopScreen = false;
     public float speed;
@@ -13,7 +21,18 @@ public class player : MonoBehaviour {
     Transform rayUp1, rayRight1, rayDown1, rayLeft1, rayUp2, rayLeft2, rayDown2, rayRight2, rayUp, rayDown, rayLeft, rayRight;
     RaycastHit2D hitUp, hitUp1, hitUp2, hitDown, hitDown1, hitDown2, hitLeft, hitLeft1, hitLeft2, hitRight, hitRight1, hitRight2;
     public GameObject soundItem;
+    
+    GameObject GameOver;
+    bool G;
+    [SerializeField]
     void Start () {
+        G = false;
+        GameOver = GameObject.Find("You_lose");
+        GameOver.SetActive(false);
+        LifeTxt.text = "x " + nummberofHeart;
+        BombTxt.text = "x " + Bomb;
+        ShoeTxt.text = "x " + Shoe;
+        BSizeTxt.text = "x " + BSize;
         speed = 2f;
         rayUp1 = transform.Find("rayUp1");
         rayRight1 = transform.Find("rayRight1");
@@ -208,14 +227,27 @@ public class player : MonoBehaviour {
             }
         }
         Flip();
+        
+        if (nummberofHeart<=0)
+        {
+            GameOver.SetActive(true);
+            Time.timeScale = 0;
+        }
+        
+        
+       
+        
     }
     void playerDie()
     {
+        
+        
         Debug.Log("die cause zombie hits");
     }
     public void playerisHitted()
     {
         --nummberofHeart;
+        LifeTxt.text = "x " + nummberofHeart;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         anim.SetBool("isLeft", false);
         anim.SetBool("isDown", false);
@@ -231,6 +263,8 @@ public class player : MonoBehaviour {
     void hitBoomsize()
     {
         ++rangeofBoom;
+        ++BSize;
+        BSizeTxt.text = "x " + BSize;
         GameObject obj = GameObject.FindGameObjectWithTag("boomsize");
         GameObject sound = Instantiate(soundItem, transform.position, Quaternion.identity) as GameObject;
         Destroy(sound, 0.5f);
@@ -238,6 +272,8 @@ public class player : MonoBehaviour {
     }
     void hitMultiboom()
     {
+        ++Bomb;
+        BombTxt.text = "x " + Bomb;
         isMultiboom = true;
         GameObject obj = GameObject.FindGameObjectWithTag("multiboom");
         GameObject sound = Instantiate(soundItem, transform.position, Quaternion.identity) as GameObject;
@@ -246,6 +282,8 @@ public class player : MonoBehaviour {
     }
     void hitShoes()
     {
+        ++Shoe;
+        ShoeTxt.text = "x " + Shoe;
         speed = 2.5f;
         GameObject obj = GameObject.FindGameObjectWithTag("shoes");
         GameObject sound = Instantiate(soundItem, transform.position, Quaternion.identity) as GameObject;

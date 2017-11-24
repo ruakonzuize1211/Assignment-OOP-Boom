@@ -33,6 +33,7 @@ public class BossController : MonoBehaviour {
         Bomber = GameObject.FindGameObjectWithTag("Player");
         controller = GameObject.FindGameObjectWithTag("GameController");
         anim = gameObject.GetComponent<Animator>();
+        anim.SetBool("isExplode", false);
         anim.SetBool("isDie", false);
         anim.SetBool("isBomb", false);
         anim.SetBool("isLeft", false);
@@ -144,6 +145,7 @@ public class BossController : MonoBehaviour {
         //Xoay hướng trái
         if(Bomber.transform.position.x<-2.5&&Bomber.transform.position.y<=3&& Bomber.transform.position.y >= -1)
         {
+            anim.SetBool("isExplode", false);
             anim.SetBool("isDie", false);
             anim.SetBool("isUp", false);
             anim.SetBool("isDown", false);
@@ -153,6 +155,7 @@ public class BossController : MonoBehaviour {
         //Xoay hướng phải
         else if (Bomber.transform.position.x > 2.5 && Bomber.transform.position.y <= 3 && Bomber.transform.position.y >= -1)
         {
+            anim.SetBool("isExplode", false);
             anim.SetBool("isDie", false);
             anim.SetBool("isUp", false);
             anim.SetBool("isDown", false);
@@ -163,6 +166,7 @@ public class BossController : MonoBehaviour {
         //Xoay hướng lên
         else if(Bomber.transform.position.y > 3)
         {
+            anim.SetBool("isExplode", false);
             anim.SetBool("isDie", false);
             anim.SetBool("isLeft", false);
             anim.SetBool("isDown", false);
@@ -173,6 +177,7 @@ public class BossController : MonoBehaviour {
         //Xoay hướng xuống( hướng mặt định)
         else
         {
+            anim.SetBool("isExplode", false);
             anim.SetBool("isDie", false);
             anim.SetBool("isUp", false);
             anim.SetBool("isLeft", false);
@@ -186,6 +191,7 @@ public class BossController : MonoBehaviour {
         //Xoay hướng trái
         if (Bomber.transform.position.x < Boss.transform.position.x && Bomber.transform.position.y < 1 && Bomber.transform.position.y > -1)
         {
+            anim.SetBool("isExplode", false);
             anim.SetBool("isDie", false);
             anim.SetBool("isUp", false);
             anim.SetBool("isDown", false);
@@ -195,6 +201,7 @@ public class BossController : MonoBehaviour {
         //Xoay hướng phải
         else if (Bomber.transform.position.x > Boss.transform.position.x && Bomber.transform.position.y < 1 && Bomber.transform.position.y > -1)
         {
+            anim.SetBool("isExplode", false);
             anim.SetBool("isDie", false);
             anim.SetBool("isUp", false);
             anim.SetBool("isDown", false);
@@ -205,6 +212,7 @@ public class BossController : MonoBehaviour {
         //Xoay hướng lên
         else if (Bomber.transform.position.y > Boss.transform.position.y)
         {
+            anim.SetBool("isExplode", false);
             anim.SetBool("isDie", false);
             anim.SetBool("isLeft", false);
             anim.SetBool("isDown", false);
@@ -215,6 +223,7 @@ public class BossController : MonoBehaviour {
         //Xoay hướng xuống( hướng mặt định)
         else
         {
+            anim.SetBool("isExplode", false);
             anim.SetBool("isDie", false);
             anim.SetBool("isUp", false);
             anim.SetBool("isLeft", false);
@@ -241,6 +250,12 @@ public class BossController : MonoBehaviour {
     }
     public void bosshitBoom()
     {
+        anim.SetBool("isDie", false);
+        anim.SetBool("isUp", false);
+        anim.SetBool("isLeft", false);
+        anim.SetBool("isRight", false);
+        anim.SetBool("isDown", false);
+        anim.SetBool("isExplode", true);
         gameObject.GetComponent<BossHealth>().AddDamge(5f);
     }
     void autoMove()
