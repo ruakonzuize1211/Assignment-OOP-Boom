@@ -5,6 +5,7 @@ using UnityEngine;
 public class zombie : MonoBehaviour {
     public int countTime;
     public GameObject mainPlayer, controller;
+    private Animator anim;
     public enum direction { up, right, down, left,multidir };
     direction lastDirection, repeatDirection;
     public float speed;
@@ -19,6 +20,11 @@ public class zombie : MonoBehaviour {
         lastDirection = direction.up;
         repeatDirection = direction.multidir;
         speed = 1.5f;
+        anim = gameObject.GetComponent<Animator>();
+        anim.SetBool("isDie", false);
+        anim.SetBool("isUp", false);
+        anim.SetBool("isLeft", false);
+        anim.SetBool("isRight", false);
         rayUp = transform.Find("rayUp");
         rayRight = transform.Find("rayRight");
         rayDown = transform.Find("rayDown");
@@ -175,6 +181,11 @@ public class zombie : MonoBehaviour {
         {
             if (!stopUp && !stopUp1 && !stopUp2 && repeatDirection!=direction.up)
             {
+                anim.SetBool("isDie", false);
+                anim.SetBool("isLeft", false);
+                anim.SetBool("isDown", false);
+                anim.SetBool("isRight", false);
+                anim.SetBool("isUp", true);
                 moveUp();
             }
             else
@@ -188,6 +199,11 @@ public class zombie : MonoBehaviour {
         {
             if (!stopDown && !stopDown1 && !stopDown2 && repeatDirection!=direction.down)
             {
+                anim.SetBool("isDie", false);
+                anim.SetBool("isUp", false);
+                anim.SetBool("isLeft", false);
+                anim.SetBool("isRight", false);
+                anim.SetBool("isDown", true);
                 moveDown();
             }
             else
@@ -201,6 +217,11 @@ public class zombie : MonoBehaviour {
         {
             if (!stopLeft && !stopLeft1 && !stopLeft2 && repeatDirection!=direction.left)
             {
+                anim.SetBool("isDie", false);
+                anim.SetBool("isUp", false);
+                anim.SetBool("isDown", false);
+                anim.SetBool("isRight", false);
+                anim.SetBool("isLeft", true);
                 moveLeft();
             }
             else
@@ -214,6 +235,11 @@ public class zombie : MonoBehaviour {
         {
             if (!stopRight && !stopRight1 && !stopRight2 && repeatDirection!=direction.right)
             {
+                anim.SetBool("isDie", false);
+                anim.SetBool("isUp", false);
+                anim.SetBool("isDown", false);
+                anim.SetBool("isLeft", false);
+                anim.SetBool("isRight", true);
                 moveRight();
             }
             else
@@ -230,6 +256,7 @@ public class zombie : MonoBehaviour {
     }
     void moveRight()
     {
+
         transform.position -= Vector3.left * speed * Time.deltaTime;
     }
     void moveLeft()
@@ -248,21 +275,41 @@ public class zombie : MonoBehaviour {
     {
         if (lastDirection == direction.up && !stopUp1 && !stopUp2 && !stopUp)
         {
+            anim.SetBool("isDie", false);
+            anim.SetBool("isLeft", false);
+            anim.SetBool("isDown", false);
+            anim.SetBool("isRight", false);
+            anim.SetBool("isUp", true);
             moveUp();
             return;
         }
         else if (lastDirection == direction.right && !stopRight1 && !stopRight2 && !stopRight)
         {
+            anim.SetBool("isDie", false);
+            anim.SetBool("isUp", false);
+            anim.SetBool("isDown", false);
+            anim.SetBool("isLeft", false);
+            anim.SetBool("isRight", true);
             moveRight();
             return;
         }
         else if (lastDirection == direction.down && !stopDown1 && !stopDown2 && !stopDown)
         {
+            anim.SetBool("isDie", false);
+            anim.SetBool("isUp", false);
+            anim.SetBool("isLeft", false);
+            anim.SetBool("isRight", false);
+            anim.SetBool("isDown", true);
             moveDown();
             return;
         }
         else if (lastDirection == direction.left && !stopLeft1 && !stopLeft2 && !stopLeft)
         {
+            anim.SetBool("isDie", false);
+            anim.SetBool("isUp", false);
+            anim.SetBool("isDown", false);
+            anim.SetBool("isRight", false);
+            anim.SetBool("isLeft", true);
             moveLeft();
             return;
         }
@@ -302,7 +349,8 @@ public class zombie : MonoBehaviour {
     }
     public void zombieDie()
     {
+        anim.SetBool("isDie", true);
         controller.GetComponent<GameController>().zombieDie();
-        Destroy(gameObject);
+        Destroy(gameObject,1f);
     }
 }

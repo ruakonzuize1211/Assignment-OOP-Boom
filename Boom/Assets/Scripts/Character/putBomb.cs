@@ -18,21 +18,9 @@ public class putBomb : MonoBehaviour {
 
     void Start () {
         gameController = GameObject.Find("GameController");
-        subx = transform.position.x - (float)Mathf.RoundToInt(transform.position.x);//>0 khi toa do lam tron nho hon
-        suby = transform.position.y - (float)Mathf.RoundToInt(transform.position.y);
-        x1 = Mathf.RoundToInt(transform.position.x) + 0.5f;
-        x2 = Mathf.RoundToInt(transform.position.x) - 0.5f;
-        y1 = Mathf.RoundToInt(transform.position.y) + 0.5f;
-        y2 = Mathf.RoundToInt(transform.position.y) - 0.5f;
-         
+                
 	}
-    void FixedUpdated()
-    {
-      
-     
-        
-         
-    }
+    
    
 	// Update is called once per frame
 	void Update () {
@@ -49,68 +37,21 @@ public class putBomb : MonoBehaviour {
             x2 = Mathf.RoundToInt(transform.position.x) - 0.5f;
             y1 = Mathf.RoundToInt(transform.position.y) + 0.5f;
             y2 = Mathf.RoundToInt(transform.position.y) - 0.5f;
-         
-            if (transform.position.x>0.0f&&subx == 0.5f && suby == 0.5f&&transform.position.y>0.0f)
-            {
-                Instantiate(Bomb2, transform.position, Quaternion.identity);
-            }
-            if (transform.position.x > 0.0f && subx > 0.0f && suby > 0.0f && transform.position.y > 0.0f)
-                {
-                    Instantiate(Bomb2, new Vector2(x1, y1), Quaternion.identity);
-                }
-            if (transform.position.x > 0.0f && subx > 0.0f && suby < 0.0f && transform.position.y > 0.0f)
-                {
-                    Instantiate(Bomb2, new Vector2(x1, y2), Quaternion.identity);
-                }
-            if (transform.position.x > 0.0f && subx < 0.0f && suby < 0.0f && transform.position.y > 0.0f)
-                {
-                    Instantiate(Bomb2, new Vector2(x2, y2), Quaternion.identity);
-                }
-            if (transform.position.x > 0.0f && subx < 0.0f && suby > 0.0f && transform.position.y > 0.0f)
-                {
-                    Instantiate(Bomb2, new Vector2(x2, y1), Quaternion.identity);
-                }
-            ///////////////////////////////////////////////////////////////////////////////////////////
-            if (transform.position.x < 0.0f && subx < 0.0f && suby < 0.0f && transform.position.y < 0.0f)
-            {
-                Instantiate(Bomb2, new Vector2(x2, y2), Quaternion.identity);
-            }
-            if (transform.position.x < 0.0f && subx < 0.0f && suby > 0.0f && transform.position.y < 0.0f)
-            {
-                Instantiate(Bomb2, new Vector2(x2, y1), Quaternion.identity);
-            }
-            if (transform.position.x < 0.0f && subx > 0.0f && suby > 0.0f && transform.position.y < 0.0f)
+            if (subx > 0.0f && suby > 0.0f)
             {
                 Instantiate(Bomb2, new Vector2(x1, y1), Quaternion.identity);
             }
-            if (transform.position.x < 0.0f && subx > 0.0f && suby < 0.0f && transform.position.y < 0.0f)
+            if (subx > 0.0f && suby < 0.0f)
             {
                 Instantiate(Bomb2, new Vector2(x1, y2), Quaternion.identity);
-                Debug.Log("ok");
             }
-            /////////////////////////////////////////////////////////////////////////////////////////
-            if (transform.position.x < 0.0f && subx < 0.0f && suby > 0.0f && transform.position.y > 0.0f)
+            if (subx < 0.0f && suby > 0.0f)
             {
                 Instantiate(Bomb2, new Vector2(x2, y1), Quaternion.identity);
             }
-            if (transform.position.x < 0.0f && subx < 0.0f && suby < 0.0f && transform.position.y > 0.0f)
+            if (subx < 0.0f && suby < 0.0f)
             {
                 Instantiate(Bomb2, new Vector2(x2, y2), Quaternion.identity);
-            }
-            if (transform.position.x > 0.0f && subx > 0.0f && suby > 0.0f && transform.position.y < 0.0f)
-            {
-                Instantiate(Bomb2, new Vector2(x1, y1), Quaternion.identity);
-            }
-            if (transform.position.x > 0.0f && subx < 0.0f && suby < 0.0f && transform.position.y < 0.0f)
-            {
-                Instantiate(Bomb2, new Vector2(x2, y2), Quaternion.identity);
-                Debug.Log("ok");
-            }
-            //////////////////////////////////////////////
-            if (transform.position.x > 0.0f && subx > 0.0f && suby < 0.0f && transform.position.y < 0.0f)
-            {
-                Instantiate(Bomb2, new Vector2(x1, y2), Quaternion.identity);
-                Debug.Log("ok");
             }
             timePassed = 0f;
         }

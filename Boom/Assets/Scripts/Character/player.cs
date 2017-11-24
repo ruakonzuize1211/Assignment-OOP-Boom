@@ -7,10 +7,12 @@ public class player : MonoBehaviour {
     bool stopScreen = false;
     public float speed;
     public int rangeofBoom = 1;
+    private Animator anim;
     public bool stopUp1, stopDown1, stopRight1, stopLeft1, stopUp2, stopDown2, stopRight2, stopLeft2;
     public bool ishitZombieup, ishitZombiedown, ishitZombieleft, ishitZombieright;
     Transform rayUp1, rayRight1, rayDown1, rayLeft1, rayUp2, rayLeft2, rayDown2, rayRight2, rayUp, rayDown, rayLeft, rayRight;
     RaycastHit2D hitUp, hitUp1, hitUp2, hitDown, hitDown1, hitDown2, hitLeft, hitLeft1, hitLeft2, hitRight, hitRight1, hitRight2;
+    public GameObject soundItem;
     void Start () {
         speed = 2f;
         rayUp1 = transform.Find("rayUp1");
@@ -25,116 +27,64 @@ public class player : MonoBehaviour {
         rayRight = transform.Find("rayRight");
         rayDown = transform.Find("rayDown");
         rayLeft = transform.Find("rayLeft");
+        anim = gameObject.GetComponent<Animator>();
+        anim.SetBool("isRevival", false);
+        anim.SetBool("isUp", false);
+        anim.SetBool("isLeft", false);
+        anim.SetBool("isRight", false);
     }
     private void FixedUpdate()
     {
-        //hit Zombie
+        //Raycast for every directions
         hitUp = Physics2D.Raycast(rayUp.position, new Vector2(0, 1f), 0.1f);
-        if (hitUp.collider != null)
+        hitDown = Physics2D.Raycast(rayDown.position, new Vector2(0, -1f), 0.1f);
+        hitRight = Physics2D.Raycast(rayRight.position, new Vector2(1f, 0), 0.1f);
+        hitLeft = Physics2D.Raycast(rayLeft.position, new Vector2(-1f, 0), 0.1f);
+        hitUp1 = Physics2D.Raycast(rayUp1.position, new Vector2(0, 1f), 0.1f);
+        hitUp2 = Physics2D.Raycast(rayUp2.position, new Vector2(0, 1f), 0.1f);
+        hitDown1 = Physics2D.Raycast(rayDown1.position, new Vector2(0, -1f), 0.1f);
+        hitDown2 = Physics2D.Raycast(rayDown2.position, new Vector2(0, -1f), 0.1f);
+        hitRight1 = Physics2D.Raycast(rayRight1.position, new Vector2(1f, 0), 0.5f);
+        hitRight2 = Physics2D.Raycast(rayRight2.position, new Vector2(1f, 0), 0.5f);
+        hitLeft1 = Physics2D.Raycast(rayLeft1.position, new Vector2(-1f, 0), 0.5f);
+        hitLeft2 = Physics2D.Raycast(rayLeft2.position, new Vector2(-1f, 0), 0.5f);
+        //Array of all raycasts
+        RaycastHit2D[] groupRaycast = { hitUp, hitUp1, hitUp2, hitLeft, hitLeft1, hitLeft2, hitRight, hitRight1, hitRight2, hitDown, hitDown1, hitDown2 };
+        //hit Zombie or boss or items
+        if (gameObject.GetComponent<BoxCollider2D>().isActiveAndEnabled)
         {
-           if(hitUp.collider.tag=="zombie")
+            for (int i = 0; i < groupRaycast.Length; ++i)
             {
-                playerisHitted();
-                return;
+                if (groupRaycast[i].collider != null)
+                {
+                    if (groupRaycast[i].collider.tag == "zombie")
+                    {
+                        playerisHitted();
+                        return;
+                    }
+                    if (groupRaycast[i].collider.tag == "boss")
+                    {
+                        playerisHitted();
+                        return;
+                    }
+                    if (groupRaycast[i].collider.tag == "shoes")
+                    {
+                        hitShoes();
+                    }
+                    if (groupRaycast[i].collider.tag == "multiboom")
+                    {
+                        hitMultiboom();
+                    }
+                    if (groupRaycast[i].collider.tag == "boomsize")
+                    {
+                        hitBoomsize();
+                    }
+                }
             }
         }
-        hitDown = Physics2D.Raycast(rayDown.position, new Vector2(0, 1f), 0.1f);
-        if (hitDown.collider != null)
-        {
-            if (hitDown.collider.tag == "zombie")
-            {
-                playerisHitted();
-                return;
-            }
-        }
-        hitRight = Physics2D.Raycast(rayRight.position, new Vector2(0, 1f), 0.1f);
-        if (hitRight.collider != null)
-        {
-            if (hitRight.collider.tag == "zombie")
-            {
-                playerisHitted();
-                return;
-            }
-        }
-        hitLeft = Physics2D.Raycast(rayLeft.position, new Vector2(0, 1f), 0.1f);
-        if (hitLeft.collider != null)
-        {
-            if (hitLeft.collider.tag == "zombie")
-            {
-                playerisHitted();
-                return;
-            }
-        }
-
-        //hitItems
-        hitUp = Physics2D.Raycast(rayUp.position, new Vector2(0, 1f), 0.1f);
-        if (hitUp.collider != null)
-        {
-            if (hitUp.collider.tag == "shoes")
-            {
-                hitShoes();
-            }
-            if(hitUp.collider.tag=="multiboom")
-            {
-                hitMultiboom();
-            }
-            if(hitUp.collider.tag=="boomsize")
-            {
-                hitBoomsize();
-            }
-        }
-        hitDown = Physics2D.Raycast(rayDown.position, new Vector2(0, 1f), 0.1f);
-        if (hitDown.collider != null)
-        {
-            if (hitDown.collider.tag == "shoes")
-            {
-                hitShoes();
-            }
-            if (hitDown.collider.tag == "multiboom")
-            {
-                hitMultiboom();
-            }
-            if (hitDown.collider.tag == "boomsize")
-            {
-                hitBoomsize();
-            }
-        }
-        hitRight = Physics2D.Raycast(rayRight.position, new Vector2(0, 1f), 0.1f);
-        if (hitRight.collider != null)
-        {
-            if (hitRight.collider.tag == "shoes")
-            {
-                hitShoes();
-            }
-            if (hitRight.collider.tag == "multiboom")
-            {
-                hitMultiboom();
-            }
-            if (hitRight.collider.tag == "boomsize")
-            {
-                hitBoomsize();
-            }
-        }
-        hitLeft = Physics2D.Raycast(rayLeft.position, new Vector2(0, 1f), 0.1f);
-        if (hitLeft.collider != null)
-        {
-            if (hitLeft.collider.tag == "shoes")
-            {
-                hitShoes();
-            }
-            if (hitLeft.collider.tag == "multiboom")
-            {
-                hitMultiboom();
-            }
-            if (hitLeft.collider.tag == "boomsize")
-            {
-                hitBoomsize();
-            }
-        }
-
         //Move directions
         //Move Up
-        hitUp1 = Physics2D.Raycast(rayUp1.position, new Vector2(0, 1f), 0.1f);
+        
         if (hitUp1.collider != null)
         {
             if (hitUp1.collider.tag == "Obstacles" || hitUp1.collider.tag=="zombie" || hitUp1.collider.tag=="Rao" || hitUp1.collider.tag=="boss")
@@ -144,7 +94,7 @@ public class player : MonoBehaviour {
         }
         else
             stopUp1 = false;
-        hitUp2 = Physics2D.Raycast(rayUp2.position, new Vector2(0, 1f), 0.1f);
+        
         if (hitUp2.collider != null)
         {
             if (hitUp2.collider.tag == "Obstacles" || hitUp2.collider.tag == "zombie" || hitUp2.collider.tag == "Rao" || hitUp2.collider.tag == "boss")
@@ -155,7 +105,7 @@ public class player : MonoBehaviour {
         else
             stopUp2 = false;
         //MoveDown
-        hitDown1 = Physics2D.Raycast(rayDown1.position, new Vector2(0, -1f), 0.1f);
+        
         if (hitDown1.collider != null)
         {
             if (hitDown1.collider.tag == "Obstacles" || hitDown1.collider.tag == "zombie" || hitDown1.collider.tag == "Rao" || hitDown1.collider.tag == "boss")
@@ -165,7 +115,7 @@ public class player : MonoBehaviour {
         }
         else
             stopDown1 = false;
-        hitDown2 = Physics2D.Raycast(rayDown2.position, new Vector2(0, -1f), 0.1f);
+        
         if (hitDown2.collider != null)
         {
             if (hitDown2.collider.tag == "Obstacles" || hitDown2.collider.tag == "zombie" || hitDown2.collider.tag == "Rao" || hitDown2.collider.tag == "boss")
@@ -176,7 +126,7 @@ public class player : MonoBehaviour {
         else
             stopDown2 = false;
         //Move Right
-        hitRight1 = Physics2D.Raycast(rayRight1.position,new Vector2(1f,0), 0.5f);
+       
         if (hitRight1.collider != null)
         {
             if (hitRight1.collider.tag == "Obstacles" || hitRight1.collider.tag == "zombie" || hitRight1.collider.tag == "Rao" || hitRight1.collider.tag == "boss")
@@ -186,7 +136,7 @@ public class player : MonoBehaviour {
         }
         else
             stopRight1 = false;
-        hitRight2 = Physics2D.Raycast(rayRight2.position, new Vector2(1f, 0), 0.5f);
+        
         if (hitRight2.collider != null)
         {
             if (hitRight2.collider.tag == "Obstacles" || hitRight2.collider.tag == "zombie" || hitRight2.collider.tag == "Rao" || hitRight2.collider.tag == "boss")
@@ -198,7 +148,7 @@ public class player : MonoBehaviour {
             stopRight2 = false;
 
         //Move left
-        hitLeft1 = Physics2D.Raycast(rayLeft1.position, new Vector2(-1f, 0), 0.5f);
+        
         if (hitLeft1.collider != null)
         {
             if (hitLeft1.collider.tag == "Obstacles" || hitLeft1.collider.tag == "zombie" || hitLeft1.collider.tag == "Rao" || hitLeft1.collider.tag == "boss")
@@ -208,7 +158,7 @@ public class player : MonoBehaviour {
         }
         else
             stopLeft1 = false;
-        hitLeft2 = Physics2D.Raycast(rayLeft2.position, new Vector2(-1f, 0), 0.5f);
+        
         if (hitLeft2.collider != null)
         {
             if (hitLeft2.collider.tag == "Obstacles" || hitLeft2.collider.tag == "zombie" || hitLeft2.collider.tag == "Rao" || hitLeft2.collider.tag == "boss")
@@ -228,6 +178,7 @@ public class player : MonoBehaviour {
         {
             if (Input.GetKey("up"))
             {
+                gameObject.GetComponent<BoxCollider2D>().enabled = true;
                 transform.position -= Vector3.down * speed * Time.deltaTime;
             }
 
@@ -236,13 +187,15 @@ public class player : MonoBehaviour {
         {
             if (Input.GetKey("down"))
             {
+                gameObject.GetComponent<BoxCollider2D>().enabled = true;
                 transform.position -= Vector3.up * speed * Time.deltaTime;
             }
         }
         if (!stopRight1 && !stopRight2)
         {
-            if(Input.GetKey("right"))
+            if (Input.GetKey("right"))
             {
+                gameObject.GetComponent<BoxCollider2D>().enabled = true;
                 transform.position -= Vector3.left * speed * Time.deltaTime;
             }
         }
@@ -250,9 +203,11 @@ public class player : MonoBehaviour {
         {
             if (Input.GetKey("left"))
             {
+                gameObject.GetComponent<BoxCollider2D>().enabled = true;
                 transform.position -= Vector3.right * speed * Time.deltaTime;
             }
         }
+        Flip();
     }
     void playerDie()
     {
@@ -261,6 +216,12 @@ public class player : MonoBehaviour {
     public void playerisHitted()
     {
         --nummberofHeart;
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        anim.SetBool("isLeft", false);
+        anim.SetBool("isDown", false);
+        anim.SetBool("isRight", false);
+        anim.SetBool("isUp", false);
+        anim.SetBool("isRevival", true);
         transform.position = new Vector2(-0.5f, -1.5f);
         if (nummberofHeart <= 0)
         {
@@ -271,18 +232,60 @@ public class player : MonoBehaviour {
     {
         ++rangeofBoom;
         GameObject obj = GameObject.FindGameObjectWithTag("boomsize");
+        GameObject sound = Instantiate(soundItem, transform.position, Quaternion.identity) as GameObject;
+        Destroy(sound, 0.5f);
         Destroy(obj);
     }
     void hitMultiboom()
     {
         isMultiboom = true;
         GameObject obj = GameObject.FindGameObjectWithTag("multiboom");
+        GameObject sound = Instantiate(soundItem, transform.position, Quaternion.identity) as GameObject;
+        Destroy(sound, 0.5f);
         Destroy(obj);
     }
     void hitShoes()
     {
         speed = 2.5f;
         GameObject obj = GameObject.FindGameObjectWithTag("shoes");
+        GameObject sound = Instantiate(soundItem, transform.position, Quaternion.identity) as GameObject;
+        Destroy(sound, 0.5f);
         Destroy(obj);
+    }
+
+    void Flip()
+    {
+        if (Input.GetKey("left"))
+        {
+            anim.SetBool("isRevival", false);
+            anim.SetBool("isUp", false);
+            anim.SetBool("isDown", false);
+            anim.SetBool("isRight", false);
+            anim.SetBool("isLeft", true);
+        }
+        if (Input.GetKey("right"))
+        {
+            anim.SetBool("isRevival", false);
+            anim.SetBool("isUp", false);
+            anim.SetBool("isDown", false);
+            anim.SetBool("isLeft", false);
+            anim.SetBool("isRight", true);
+        }
+        if (Input.GetKey("up"))
+        {
+            anim.SetBool("isRevival", false);
+            anim.SetBool("isLeft", false);
+            anim.SetBool("isDown", false);
+            anim.SetBool("isRight", false);
+            anim.SetBool("isUp", true);
+        }
+        if (Input.GetKey("down"))
+        {
+            anim.SetBool("isRevival", false);
+            anim.SetBool("isUp", false);
+            anim.SetBool("isLeft", false);
+            anim.SetBool("isRight", false);
+            anim.SetBool("isDown", true);
+        }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bum : MonoBehaviour {
     public GameObject boxbum;
-
+    public bool includeItems = false, boomsize = false, multiboom = false, shoes = false;
 	// Use this for initialization
 	void Start () {
 		

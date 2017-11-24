@@ -12,11 +12,14 @@ public class BossController : MonoBehaviour {
     private float lastBombTime = 0;
     public float throughBombTime = 0.5f;
     private GameObject Bomber;
+    private GameObject Boss;
     private Animator anim;
     public bool stopUp, stopDown, stopLeft, stopRight;
     direction lastDirection;
     Transform rayUp, rayDown, rayLeft, rayRight;
     RaycastHit2D hitUp, hitDown, hitLeft, hitRight;
+    private float x1, x2, y1, y2, subx, suby;
+
     public enum direction { up, right, down, left, multidir };
     // Use this for initialization
     void Start () {
@@ -26,9 +29,11 @@ public class BossController : MonoBehaviour {
         rayDown = transform.Find("rayDown");
         rayLeft = transform.Find("rayLeft");
         UpdateBombTime();
+        Boss = GameObject.FindGameObjectWithTag("boss");
         Bomber = GameObject.FindGameObjectWithTag("Player");
         controller = GameObject.FindGameObjectWithTag("GameController");
         anim = gameObject.GetComponent<Animator>();
+        anim.SetBool("isDie", false);
         anim.SetBool("isBomb", false);
         anim.SetBool("isLeft", false);
         anim.SetBool("isRight", false);
@@ -73,9 +78,13 @@ public class BossController : MonoBehaviour {
         bossActive = controller.GetComponent<GameController>().bossActive;
         if(bossActive)
         {
+            Flip1();
             autoMove();
         }
-        Flip();
+        else
+        {
+            Flip();
+        }
         if (Time.time >= lastBombTime + bombTime-throughBombTime)
         {
             anim.SetBool("isBomb", true);
@@ -96,9 +105,37 @@ public class BossController : MonoBehaviour {
     {
         GameObject bom = Instantiate(bomb,transform.position,Quaternion.identity) as GameObject;
         bom.GetComponent<BombControler>().throwbyBoss = true;
-        bom.GetComponent<BombControler>().target = Bomber.transform.position; //xác định vị trí nhân vật để bom tìm đến nhân vật 
-        UpdateBombTime();
-        anim.SetBool("isBomb", false);
+        subx = Bomber.transform.position.x - (float)Mathf.RoundToInt(Bomber.transform.position.x);//>0 khi toa do lam tron nho hon
+        suby = Bomber.transform.position.y - (float)Mathf.RoundToInt(Bomber.transform.position.y);
+        x1 = Mathf.RoundToInt(Bomber.transform.position.x) + 0.5f;
+        x2 = Mathf.RoundToInt(Bomber.transform.position.x) - 0.5f;
+        y1 = Mathf.RoundToInt(Bomber.transform.position.y) + 0.5f;
+        y2 = Mathf.RoundToInt(Bomber.transform.position.y) - 0.5f;
+        if (subx > 0.0f && suby > 0.0f)
+        {
+            bom.GetComponent<BombControler>().target = new Vector2( x1,y1); //xác định vị trí nhân vật để bom tìm đến nhân vật 
+            UpdateBombTime();
+            anim.SetBool("isBomb", false);
+        }
+        if (subx > 0.0f && suby < 0.0f)
+        {
+            bom.GetComponent<BombControler>().target = new Vector2(x1, y2); //xác định vị trí nhân vật để bom tìm đến nhân vật 
+            UpdateBombTime();
+            anim.SetBool("isBomb", false);
+        }
+        if (subx < 0.0f && suby > 0.0f)
+        {
+            bom.GetComponent<BombControler>().target = new Vector2(x2, y1); //xác định vị trí nhân vật để bom tìm đến nhân vật 
+            UpdateBombTime();
+            anim.SetBool("isBomb", false);
+        }
+        if (subx < 0.0f && suby < 0.0f)
+        {
+            bom.GetComponent<BombControler>().target = new Vector2(x2, y2); //xác định vị trí nhân vật để bom tìm đến nhân vật 
+            UpdateBombTime();
+            anim.SetBool("isBomb", false);
+        }
+       
     }
 
     //Hàm để tướng xoay theo hướng của Player để bắng bom
@@ -107,6 +144,7 @@ public class BossController : MonoBehaviour {
         //Xoay hướng trái
         if(Bomber.transform.position.x<-2.5&&Bomber.transform.position.y<=3&& Bomber.transform.position.y >= -1)
         {
+            anim.SetBool("isDie", false);
             anim.SetBool("isUp", false);
             anim.SetBool("isDown", false);
             anim.SetBool("isRight", false);
@@ -115,6 +153,7 @@ public class BossController : MonoBehaviour {
         //Xoay hướng phải
         else if (Bomber.transform.position.x > 2.5 && Bomber.transform.position.y <= 3 && Bomber.transform.position.y >= -1)
         {
+            anim.SetBool("isDie", false);
             anim.SetBool("isUp", false);
             anim.SetBool("isDown", false);
             anim.SetBool("isLeft", false);
@@ -124,6 +163,7 @@ public class BossController : MonoBehaviour {
         //Xoay hướng lên
         else if(Bomber.transform.position.y > 3)
         {
+            anim.SetBool("isDie", false);
             anim.SetBool("isLeft", false);
             anim.SetBool("isDown", false);
             anim.SetBool("isRight", false);
@@ -133,12 +173,56 @@ public class BossController : MonoBehaviour {
         //Xoay hướng xuống( hướng mặt định)
         else
         {
+            anim.SetBool("isDie", false);
             anim.SetBool("isUp", false);
             anim.SetBool("isLeft", false);
             anim.SetBool("isRight", false);
             anim.SetBool("isDown", true);
         }
     }
+
+    void Flip1()
+    {
+        //Xoay hướng trái
+        if (Bomber.transform.position.x < Boss.transform.position.x && Bomber.transform.position.y < 1 && Bomber.transform.position.y > -1)
+        {
+            anim.SetBool("isDie", false);
+            anim.SetBool("isUp", false);
+            anim.SetBool("isDown", false);
+            anim.SetBool("isRight", false);
+            anim.SetBool("isLeft", true);
+        }
+        //Xoay hướng phải
+        else if (Bomber.transform.position.x > Boss.transform.position.x && Bomber.transform.position.y < 1 && Bomber.transform.position.y > -1)
+        {
+            anim.SetBool("isDie", false);
+            anim.SetBool("isUp", false);
+            anim.SetBool("isDown", false);
+            anim.SetBool("isLeft", false);
+            anim.SetBool("isRight", true);
+
+        }
+        //Xoay hướng lên
+        else if (Bomber.transform.position.y > Boss.transform.position.y)
+        {
+            anim.SetBool("isDie", false);
+            anim.SetBool("isLeft", false);
+            anim.SetBool("isDown", false);
+            anim.SetBool("isRight", false);
+            anim.SetBool("isUp", true);
+
+        }
+        //Xoay hướng xuống( hướng mặt định)
+        else
+        {
+            anim.SetBool("isDie", false);
+            anim.SetBool("isUp", false);
+            anim.SetBool("isLeft", false);
+            anim.SetBool("isRight", false);
+            anim.SetBool("isDown", true);
+        }
+    }
+
     void moveRight()
     {
         transform.position -= Vector3.left * speed * Time.deltaTime;

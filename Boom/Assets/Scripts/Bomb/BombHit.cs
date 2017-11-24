@@ -6,25 +6,42 @@ public class BombHit : MonoBehaviour {
     //Những cái để dạng comment để dành khi làm màn hình kết thúc nha Ánh
     GameObject player;
     public GameObject explosionPrefab;
-    const float TIME_TO_WAIT = 3f;
+    const float TIME_TO_WAIT = 2f;
     float timeWaitPassed = 0;
     bool bWaiting = false;
     public int rangeofBoom = 1;
-	// Use this for initialization
-	void Start () {
+    //raycast bốn phía kiểm tra vật cản
+    Transform rayUp1, rayRight1, rayDown1, rayLeft1, rayUp2, rayLeft2, rayDown2, rayRight2, rayUp, rayDown, rayLeft, rayRight;
+    // Use this for initialization
+    void Start() {
+        rayUp1 = transform.Find("rayUp1");
+        rayRight1 = transform.Find("rayRight1");
+        rayDown1 = transform.Find("rayDown1");
+        rayLeft1 = transform.Find("rayLeft1");
+        rayUp2 = transform.Find("rayUp2");
+        rayRight2 = transform.Find("rayRight2");
+        rayDown2 = transform.Find("rayDown2");
+        rayLeft2 = transform.Find("rayLeft2");
+        rayUp = transform.Find("rayUp");
+        rayRight = transform.Find("rayRight");
+        rayDown = transform.Find("rayDown");
+        rayLeft = transform.Find("rayLeft");
         player = GameObject.Find("bomber");
         bWaiting = true;
         timeWaitPassed = 0;
     }
-	
-	// Update is called once per frame
+    private void FixedUpdate()
+    {
+
+    }
+    // Update is called once per frame
     void Update()
     {
         rangeofBoom = player.GetComponent<player>().rangeofBoom;
         if (bWaiting)   //update wait time
         {
             timeWaitPassed += Time.deltaTime;   //increase time
-            Destroy(gameObject, 3f);
+            Destroy(gameObject, 2f);
             if (timeWaitPassed > TIME_TO_WAIT)
             {
                 bWaiting = false;
@@ -34,136 +51,68 @@ public class BombHit : MonoBehaviour {
                 Vector3 boomPosition = transform.position;
                 for (int i = 1; i <= rangeofBoom; ++i)
                 {
-                    RaycastHit2D hitup = Physics2D.Raycast(boomPosition, Vector2.up, i, 1);
-                    RaycastHit2D hitdown = Physics2D.Raycast(boomPosition, Vector2.down, i, 1);
-                    RaycastHit2D hitright = Physics2D.Raycast(boomPosition, Vector2.right, i, 1);
-                    RaycastHit2D hitleft = Physics2D.Raycast(boomPosition, Vector2.left, i, 1);
+                    float dis = i - 0.5f * i;
+                    RaycastHit2D hitup = Physics2D.Raycast(rayUp.position, Vector2.up, dis, 1);
+                    RaycastHit2D hitdown = Physics2D.Raycast(rayDown.position, Vector2.down, dis, 1);
+                    RaycastHit2D hitright = Physics2D.Raycast(rayRight.position, Vector2.right, dis, 1);
+                    RaycastHit2D hitleft = Physics2D.Raycast(rayLeft.position, Vector2.left, dis, 1);
+                    RaycastHit2D hitup1 = Physics2D.Raycast(rayUp.position, Vector2.up, dis, 1);
+                    RaycastHit2D hitdown1 = Physics2D.Raycast(rayDown.position, Vector2.down, dis, 1);
+                    RaycastHit2D hitright1 = Physics2D.Raycast(rayRight.position, Vector2.right, dis, 1);
+                    RaycastHit2D hitleft1 = Physics2D.Raycast(rayLeft.position, Vector2.left, dis, 1);
+                    RaycastHit2D hitup2 = Physics2D.Raycast(rayUp.position, Vector2.up, dis, 1);
+                    RaycastHit2D hitdown2 = Physics2D.Raycast(rayDown.position, Vector2.down, dis, 1);
+                    RaycastHit2D hitright2 = Physics2D.Raycast(rayRight.position, Vector2.right, dis, 1);
+                    RaycastHit2D hitleft2 = Physics2D.Raycast(rayLeft.position, Vector2.left, dis, 1);
+                    RaycastHit2D[] groupRaycast = { hitup, hitup1, hitup2, hitdown, hitdown1, hitdown2, hitleft, hitleft1, hitleft2, hitright, hitright1, hitright2 };
                     //Bomb bắt đầu nổ
-                    if (hitdown.collider == null)
+                    if (hitdown.collider == null && hitdown1.collider == null && hitdown2.collider == null)
                     {
                         GameObject obj1 = Instantiate(explosionPrefab, new Vector2(boomPosition.x, boomPosition.y - i), Quaternion.identity) as GameObject;
-                        Destroy(obj1, 0.5f);
                     }
-                    if (hitup.collider == null)
+                    if (hitup.collider == null && hitup1.collider == null && hitup2.collider == null)
                     {
                         GameObject obj1 = Instantiate(explosionPrefab, new Vector2(boomPosition.x, boomPosition.y + i), Quaternion.identity) as GameObject;
-                        Destroy(obj1, 0.5f);
+                 
 
                     }
-                    if (hitright.collider == null)
+                    if (hitright.collider == null && hitright1.collider == null && hitright2.collider == null)
                     {
                         GameObject obj1 = Instantiate(explosionPrefab, new Vector2(boomPosition.x + i, boomPosition.y), Quaternion.identity) as GameObject;
-                        Destroy(obj1, 0.5f);
+                       
                     }
-                    if (hitleft.collider == null)
+                    if (hitleft.collider == null && hitleft1.collider == null && hitleft2.collider == null)
                     {
                         GameObject obj1 = Instantiate(explosionPrefab, new Vector2(boomPosition.x - i, boomPosition.y), Quaternion.identity) as GameObject;
-                        Destroy(obj1, 0.5f);
+                        
                     }
-                    if (hitdown.collider != null && hitdown.collider.tag == "Rao")
+                    //Check is this not Obstacles
+                    bool down = (hitdown.collider == null || (hitdown.collider != null && hitdown.collider.tag != "Obstacles")) && (hitdown1.collider == null || (hitdown1.collider != null && hitdown1.collider.tag != "Obstacles")) && (hitdown2.collider == null || (hitdown2.collider != null && hitdown2.collider.tag != "Obstacles"));
+                    bool up = (hitup.collider == null || (hitup.collider != null && hitup.collider.tag != "Obstacles")) && (hitup1.collider == null || (hitup1.collider != null && hitup1.collider.tag != "Obstacles")) && (hitup2.collider == null || (hitup2.collider != null && hitup2.collider.tag != "Obstacles"));
+                    bool left = (hitleft.collider == null || (hitleft.collider != null && hitleft.collider.tag != "Obstacles")) && (hitleft1.collider == null || (hitleft1.collider != null && hitleft1.collider.tag != "Obstacles")) && (hitleft2.collider == null || (hitleft2.collider != null && hitleft2.collider.tag != "Obstacles"));
+                    bool right = (hitright.collider == null || (hitright.collider != null && hitright.collider.tag != "Obstacles")) && (hitright1.collider == null || (hitright1.collider != null && hitright1.collider.tag != "Obstacles")) && (hitright2.collider == null || (hitright2.collider != null && hitright2.collider.tag != "Obstacles"));
+                    if (down)
                     {
-                        GameObject obj1 = Instantiate(explosionPrefab, new Vector2(transform.position.x, transform.position.y - i), Quaternion.identity) as GameObject;
-                        Destroy(hitdown.collider);
-                        Destroy(obj1, 0.5f);
+                        GameObject obj1 = Instantiate(explosionPrefab, new Vector2(boomPosition.x, boomPosition.y - i), Quaternion.identity) as GameObject;
+                       
                     }
-                    if (hitup.collider != null && hitup.collider.tag == "Rao")
+                    if (up)
                     {
-                        GameObject obj1 = Instantiate(explosionPrefab, new Vector2(transform.position.x, transform.position.y + i), Quaternion.identity) as GameObject;
-
-                        //     GameObject obj = Instantiate(boxbum, hitup.transform.position, Quaternion.identity) as GameObject;
-                        Destroy(hitup.collider);
-                        Destroy(obj1, 0.5f);
-                        //    Destroy(obj, 1f);
-
-                    }
-                    if (hitleft.collider != null && hitleft.collider.tag == "Rao")
-                    {
-                        GameObject obj1 = Instantiate(explosionPrefab, new Vector2(transform.position.x - i, transform.position.y), Quaternion.identity) as GameObject;
-                        //    GameObject obj = Instantiate(boxbum, hitleft.transform.position, Quaternion.identity) as GameObject;
-                        Destroy(hitleft.collider);
-                        Destroy(obj1, 0.5f);
-                        //  Destroy(obj, 1f);
+                        GameObject obj1 = Instantiate(explosionPrefab, new Vector2(boomPosition.x, boomPosition.y + i), Quaternion.identity) as GameObject;
+                       
 
                     }
-                    if (hitright.collider != null && hitright.collider.tag == "Rao")
+                    if (right)
                     {
-                        GameObject obj1 = Instantiate(explosionPrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity) as GameObject;
-
-                        //    GameObject obj = Instantiate(boxbum, hitright.transform.position, Quaternion.identity) as GameObject;
-                        Destroy(hitright.collider);
-                        Destroy(obj1, 0.5f);
-                        //  Destroy(obj, 1f);
+                        GameObject obj1 = Instantiate(explosionPrefab, new Vector2(boomPosition.x + i, boomPosition.y), Quaternion.identity) as GameObject;
+                      
                     }
-                    if (hitdown.transform != null && (hitdown.transform.tag == "Player" || hitdown.transform.tag == "zombie" || hitdown.transform.tag == "Gift" || hitdown.transform.tag == "boss"))
+                    if (left)
                     {
-                        GameObject obj1 = Instantiate(explosionPrefab, new Vector2(transform.position.x, transform.position.y - i), Quaternion.identity) as GameObject;
-                        Destroy(obj1, 0.5f);
-                        if (hitdown.transform.tag == "Player")
-                        {
-                            hitdown.transform.GetComponent<player>().playerisHitted();
-                        }
-                        if (hitdown.collider.tag == "zombie")
-                        {
-                            hitdown.transform.GetComponent<zombie>().zombieDie();
-                        }
-                        if (hitdown.transform.tag == "boss")
-                        {
-                            hitdown.transform.GetComponent<BossController>().bosshitBoom();
-                        }
-                    }
-                    if (hitup.transform != null && (hitup.transform.tag == "Player" || hitup.transform.tag == "zombie" || hitup.transform.tag == "Gift" || hitup.transform.tag == "boss"))
-                    {
-                        GameObject obj1 = Instantiate(explosionPrefab, new Vector2(transform.position.x, transform.position.y + i), Quaternion.identity) as GameObject;
-                        Destroy(obj1, 0.5f);
-                        if (hitup.transform.tag == "Player")
-                        {
-                            hitup.transform.GetComponent<player>().playerisHitted();
-                        }
-                        if (hitup.collider.tag == "zombie")
-                        {
-                            hitup.transform.GetComponent<zombie>().zombieDie();
-                        }
-                        if (hitup.transform.tag == "boss")
-                        {
-                            hitup.transform.GetComponent<BossController>().bosshitBoom();
-                        }
-                    }
-                    if (hitright.transform != null && (hitright.transform.tag == "Player" || hitright.transform.tag == "zombie" || hitright.transform.tag == "Gift" || hitright.transform.tag == "boss"))
-                    {
-                        GameObject obj1 = Instantiate(explosionPrefab, new Vector2(transform.position.x + i, transform.position.y), Quaternion.identity) as GameObject;
-                        Destroy(obj1, 0.5f);
-                        if (hitright.transform.tag == "Player")
-                        {
-                            hitright.transform.GetComponent<player>().playerisHitted();
-                        }
-                        if (hitright.collider.tag == "zombie")
-                        {
-                            hitright.transform.GetComponent<zombie>().zombieDie();
-                        }
-                        if (hitright.transform.tag == "boss")
-                        {
-                            hitright.transform.GetComponent<BossController>().bosshitBoom();
-                        }
-                    }
-                    if (hitleft.transform != null && (hitleft.transform.tag == "Player" || hitleft.transform.tag == "zombie" || hitleft.transform.tag == "Gift" || hitleft.transform.tag == "boss"))
-                    {
-                        GameObject obj1 = Instantiate(explosionPrefab, new Vector2(transform.position.x - i, transform.position.y), Quaternion.identity) as GameObject;
-                        Destroy(obj1, 0.5f);
-                        if (hitleft.transform.tag == "Player")
-                        {
-                            hitleft.transform.GetComponent<player>().playerisHitted();
-                        }
-                        if (hitleft.collider.tag == "zombie")
-                        {
-                            hitleft.transform.GetComponent<zombie>().zombieDie();
-                        }
-                        if (hitleft.transform.tag == "boss")
-                        {
-                            hitleft.transform.GetComponent<BossController>().bosshitBoom();
-                        }
+                        GameObject obj1 = Instantiate(explosionPrefab, new Vector2(boomPosition.x - i, boomPosition.y), Quaternion.identity) as GameObject;
+                       
                     }
                 }
-                //Start Doing something he
             }
         }
     }
