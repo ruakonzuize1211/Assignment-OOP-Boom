@@ -13,6 +13,7 @@ TagManager:
   - shoes
   - boomsize
   - multiboom
+  - coverItems
   layers:
   - Default
   - TransparentFX

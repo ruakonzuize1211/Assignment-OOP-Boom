@@ -64,7 +64,6 @@ public class BombHit : MonoBehaviour {
                     RaycastHit2D hitdown2 = Physics2D.Raycast(rayDown.position, Vector2.down, dis, 1);
                     RaycastHit2D hitright2 = Physics2D.Raycast(rayRight.position, Vector2.right, dis, 1);
                     RaycastHit2D hitleft2 = Physics2D.Raycast(rayLeft.position, Vector2.left, dis, 1);
-                    RaycastHit2D[] groupRaycast = { hitup, hitup1, hitup2, hitdown, hitdown1, hitdown2, hitleft, hitleft1, hitleft2, hitright, hitright1, hitright2 };
                     //Bomb bắt đầu nổ
                     if (hitdown.collider == null && hitdown1.collider == null && hitdown2.collider == null)
                     {

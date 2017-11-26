@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class player : MonoBehaviour {
+    float timetoMove;
+    bool canMove;
     public Text LifeTxt;
     public Text BSizeTxt;
     public Text ShoeTxt;
@@ -26,13 +28,15 @@ public class player : MonoBehaviour {
     bool G;
     [SerializeField]
     void Start () {
+        timetoMove = 4f;
+        canMove = true;
         G = false;
         GameOver = GameObject.Find("You_lose");
         GameOver.SetActive(false);
-        LifeTxt.text = "x " + nummberofHeart;
+        /*text = "x " + nummberofHeart;
         BombTxt.text = "x " + Bomb;
         ShoeTxt.text = "x " + Shoe;
-        BSizeTxt.text = "x " + BSize;
+        BSizeTxt.text = "x " + BSize;*/
         speed = 2f;
         rayUp1 = transform.Find("rayUp1");
         rayRight1 = transform.Find("rayRight1");
@@ -106,7 +110,7 @@ public class player : MonoBehaviour {
         
         if (hitUp1.collider != null)
         {
-            if (hitUp1.collider.tag == "Obstacles" || hitUp1.collider.tag=="zombie" || hitUp1.collider.tag=="Rao" || hitUp1.collider.tag=="boss")
+            if (hitUp1.collider.tag == "Obstacles" || hitUp1.collider.tag=="zombie" || hitUp1.collider.tag=="Rao" || hitUp1.collider.tag=="boss" || hitUp1.collider.tag=="coverItems" || hitUp1.collider.tag=="Player")
                 stopUp1 = true;
             else
                 stopUp1 = false;
@@ -116,7 +120,7 @@ public class player : MonoBehaviour {
         
         if (hitUp2.collider != null)
         {
-            if (hitUp2.collider.tag == "Obstacles" || hitUp2.collider.tag == "zombie" || hitUp2.collider.tag == "Rao" || hitUp2.collider.tag == "boss")
+            if (hitUp2.collider.tag == "Obstacles" || hitUp2.collider.tag == "zombie" || hitUp2.collider.tag == "Rao" || hitUp2.collider.tag == "boss" || hitUp2.collider.tag == "coverItems" || hitUp2.collider.tag == "Player")
                 stopUp2 = true;
             else
                 stopUp2 = false;
@@ -127,7 +131,7 @@ public class player : MonoBehaviour {
         
         if (hitDown1.collider != null)
         {
-            if (hitDown1.collider.tag == "Obstacles" || hitDown1.collider.tag == "zombie" || hitDown1.collider.tag == "Rao" || hitDown1.collider.tag == "boss")
+            if (hitDown1.collider.tag == "Obstacles" || hitDown1.collider.tag == "zombie" || hitDown1.collider.tag == "Rao" || hitDown1.collider.tag == "boss" || hitDown1.collider.tag == "coverItems" || hitDown1.collider.tag == "Player")
                 stopDown1 = true;
             else
                 stopDown1 = false;
@@ -137,7 +141,7 @@ public class player : MonoBehaviour {
         
         if (hitDown2.collider != null)
         {
-            if (hitDown2.collider.tag == "Obstacles" || hitDown2.collider.tag == "zombie" || hitDown2.collider.tag == "Rao" || hitDown2.collider.tag == "boss")
+            if (hitDown2.collider.tag == "Obstacles" || hitDown2.collider.tag == "zombie" || hitDown2.collider.tag == "Rao" || hitDown2.collider.tag == "boss" || hitDown2.collider.tag == "coverItems" || hitDown2.collider.tag == "Player")
                 stopDown2 = true;
             else
                 stopDown2 = false;
@@ -148,7 +152,7 @@ public class player : MonoBehaviour {
        
         if (hitRight1.collider != null)
         {
-            if (hitRight1.collider.tag == "Obstacles" || hitRight1.collider.tag == "zombie" || hitRight1.collider.tag == "Rao" || hitRight1.collider.tag == "boss")
+            if (hitRight1.collider.tag == "Obstacles" || hitRight1.collider.tag == "zombie" || hitRight1.collider.tag == "Rao" || hitRight1.collider.tag == "boss" || hitRight1.collider.tag == "coverItems" || hitRight1.collider.tag == "Player")
                 stopRight1 = true;
             else
                 stopRight1 = false;
@@ -158,7 +162,7 @@ public class player : MonoBehaviour {
         
         if (hitRight2.collider != null)
         {
-            if (hitRight2.collider.tag == "Obstacles" || hitRight2.collider.tag == "zombie" || hitRight2.collider.tag == "Rao" || hitRight2.collider.tag == "boss")
+            if (hitRight2.collider.tag == "Obstacles" || hitRight2.collider.tag == "zombie" || hitRight2.collider.tag == "Rao" || hitRight2.collider.tag == "boss" || hitRight2.collider.tag == "coverItems" || hitRight2.collider.tag == "Player")
                 stopRight2 = true;
             else
                 stopRight2 = false;
@@ -170,7 +174,7 @@ public class player : MonoBehaviour {
         
         if (hitLeft1.collider != null)
         {
-            if (hitLeft1.collider.tag == "Obstacles" || hitLeft1.collider.tag == "zombie" || hitLeft1.collider.tag == "Rao" || hitLeft1.collider.tag == "boss")
+            if (hitLeft1.collider.tag == "Obstacles" || hitLeft1.collider.tag == "zombie" || hitLeft1.collider.tag == "Rao" || hitLeft1.collider.tag == "boss" || hitLeft1.collider.tag == "coverItems" || hitLeft1.collider.tag == "Player")
                 stopLeft1 = true;
             else
                 stopLeft1 = false;
@@ -180,7 +184,7 @@ public class player : MonoBehaviour {
         
         if (hitLeft2.collider != null)
         {
-            if (hitLeft2.collider.tag == "Obstacles" || hitLeft2.collider.tag == "zombie" || hitLeft2.collider.tag == "Rao" || hitLeft2.collider.tag == "boss")
+            if (hitLeft2.collider.tag == "Obstacles" || hitLeft2.collider.tag == "zombie" || hitLeft2.collider.tag == "Rao" || hitLeft2.collider.tag == "boss" || hitLeft2.collider.tag == "coverItems" || hitLeft2.collider.tag == "Player")
                 stopLeft2 = true;
             else
                 stopLeft2 = false;
@@ -193,60 +197,62 @@ public class player : MonoBehaviour {
     // Update is called once per frame
 
     void Update () {
-        if (!stopUp1 && !stopUp2)
+        if(timetoMove>=3f)
         {
-            if (Input.GetKey("up"))
-            {
-                gameObject.GetComponent<BoxCollider2D>().enabled = true;
-                transform.position -= Vector3.down * speed * Time.deltaTime;
-            }
+            canMove = true;
+        }
+        else
+        {
+            timetoMove += Time.deltaTime;
+        }
 
-        }
-        if (!stopDown1 && !stopDown2)
+        if (canMove)
         {
-            if (Input.GetKey("down"))
+            if (Input.GetKey("up") || Input.GetKey("w"))
             {
-                gameObject.GetComponent<BoxCollider2D>().enabled = true;
-                transform.position -= Vector3.up * speed * Time.deltaTime;
+                if (!stopUp1 && !stopUp2)
+                {
+                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                    transform.position -= Vector3.down * speed * Time.deltaTime;
+                }
+
             }
-        }
-        if (!stopRight1 && !stopRight2)
-        {
-            if (Input.GetKey("right"))
+            else if (Input.GetKey("down") || Input.GetKey("s"))
             {
-                gameObject.GetComponent<BoxCollider2D>().enabled = true;
-                transform.position -= Vector3.left * speed * Time.deltaTime;
+                if (!stopDown1 && !stopDown2)
+                {
+                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                    transform.position -= Vector3.up * speed * Time.deltaTime;
+                }
             }
-        }
-        if (!stopLeft1 && !stopLeft2)
-        {
-            if (Input.GetKey("left"))
+            else if (Input.GetKey("right") || Input.GetKey("d"))
             {
-                gameObject.GetComponent<BoxCollider2D>().enabled = true;
-                transform.position -= Vector3.right * speed * Time.deltaTime;
+                if (!stopRight1 && !stopRight2)
+                {
+                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                    transform.position -= Vector3.left * speed * Time.deltaTime;
+                }
             }
+            else if (Input.GetKey("left") || Input.GetKey("a"))
+            {
+                if (!stopLeft1 && !stopLeft2)
+                {
+                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                    transform.position -= Vector3.right * speed * Time.deltaTime;
+                }
+            }
+            Flip();
         }
-        Flip();
-        
-        if (nummberofHeart<=0)
-        {
-            GameOver.SetActive(true);
-            Time.timeScale = 0;
-        }
-        
-        
-       
-        
     }
     void playerDie()
     {
-        
-        
-        Debug.Log("die cause zombie hits");
+        GameOver.SetActive(true);
+        Time.timeScale = 0;
     }
     public void playerisHitted()
     {
-        --nummberofHeart;
+        if (nummberofHeart > 0)
+            --nummberofHeart;
         LifeTxt.text = "x " + nummberofHeart;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         anim.SetBool("isLeft", false);
@@ -255,6 +261,8 @@ public class player : MonoBehaviour {
         anim.SetBool("isUp", false);
         anim.SetBool("isRevival", true);
         transform.position = new Vector2(-0.5f, -1.5f);
+        canMove = false;
+        timetoMove = 0f;
         if (nummberofHeart <= 0)
         {
             playerDie();
@@ -284,7 +292,7 @@ public class player : MonoBehaviour {
     {
         ++Shoe;
         ShoeTxt.text = "x " + Shoe;
-        speed = 2.5f;
+        speed += 0.5f;
         GameObject obj = GameObject.FindGameObjectWithTag("shoes");
         GameObject sound = Instantiate(soundItem, transform.position, Quaternion.identity) as GameObject;
         Destroy(sound, 0.5f);
@@ -293,7 +301,7 @@ public class player : MonoBehaviour {
 
     void Flip()
     {
-        if (Input.GetKey("left"))
+        if (Input.GetKey("left") || Input.GetKey("a"))
         {
             anim.SetBool("isRevival", false);
             anim.SetBool("isUp", false);
@@ -301,7 +309,7 @@ public class player : MonoBehaviour {
             anim.SetBool("isRight", false);
             anim.SetBool("isLeft", true);
         }
-        if (Input.GetKey("right"))
+        if (Input.GetKey("right") || Input.GetKey("d"))
         {
             anim.SetBool("isRevival", false);
             anim.SetBool("isUp", false);
@@ -309,7 +317,7 @@ public class player : MonoBehaviour {
             anim.SetBool("isLeft", false);
             anim.SetBool("isRight", true);
         }
-        if (Input.GetKey("up"))
+        if (Input.GetKey("up") || Input.GetKey("w"))
         {
             anim.SetBool("isRevival", false);
             anim.SetBool("isLeft", false);
@@ -317,7 +325,7 @@ public class player : MonoBehaviour {
             anim.SetBool("isRight", false);
             anim.SetBool("isUp", true);
         }
-        if (Input.GetKey("down"))
+        if (Input.GetKey("down") || Input.GetKey("s"))
         {
             anim.SetBool("isRevival", false);
             anim.SetBool("isUp", false);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class explosiveboom : MonoBehaviour
 {
-    bool canHitboss = true, canHitzombie = true, canhitShoes = true, canHitboomsize = true, canHitmultiboom = true, canHitrao = true, canhitPlayer = true;
+    bool canHitboss = true, canHitzombie = true, canhitShoes = true, canHitboomsize = true, canHitmultiboom = true, canHitrao = true, canhitPlayer = true, canhitCoveritems = true;
     float x, y;
     Vector3 mid, midUp, midDown, midLeft, midRight;
     RaycastHit2D up, up1, up2, down, down1, down2, left, left1, left2, right, right1, right2;
@@ -87,6 +87,25 @@ public class explosiveboom : MonoBehaviour
                     }
                     Destroy(groupRaycast[i, j].collider);
                     canHitrao = false;
+                    break;
+                }
+            }
+            for (int j = 0; j < 3; ++j)
+            {
+                if (groupRaycast[i, j].collider != null && groupRaycast[i, j].transform.tag == "coverItems" && canhitCoveritems)
+                {
+                    if (groupRaycast[i, j].collider.GetComponent<BumforcoverItems>().includeItems == true)
+                    {
+                        GameController gcl = controller.GetComponent<GameController>();
+                        BumforcoverItems b = groupRaycast[i, j].collider.GetComponent<BumforcoverItems>();
+                        gcl.createItem = true;
+                        gcl.boomsize = b.boomsize;
+                        gcl.multiboom = b.multiboom;
+                        gcl.shoes = b.shoes;
+                        gcl.itemPosition = groupRaycast[i, j].transform.position;
+                    }
+                    Destroy(groupRaycast[i, j].collider);
+                    canhitCoveritems = false;
                     break;
                 }
             }

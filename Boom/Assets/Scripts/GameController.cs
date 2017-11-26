@@ -11,15 +11,27 @@ public class GameController : MonoBehaviour {
     public bool timetoCreateItem = false;
     public bool createItem = false;
     public bool boomsize = false, multiboom = false, shoes = false;
+    //for boss
+    public GameObject YouWin, btnWin;
     // Use this for initialization
     void Start () {
         numbersZombie = 1;
         bossActive = false;
-	}
+        YouWin = GameObject.Find("You_win");
+        btnWin = GameObject.Find("NEXT LEVEL");
+        YouWin.SetActive(false);
+        btnWin.SetActive(false);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        if(timetoCreateItem)
+        GameObject boss = GameObject.FindGameObjectWithTag("boss");
+        if(boss==null)
+        {
+            YouWin.SetActive(true);
+            btnWin.SetActive(true);
+        }
+        if (timetoCreateItem)
         {
             makeItem();
         }

@@ -9,18 +9,21 @@ public class BossHealth : MonoBehaviour {
     float currHealth;
     private Animator anim;
     public Slider BossHealthSlider;//Thanh máu UI
-	// Use this for initialization
-	void Start () {
+    bool p;
+    [SerializeField]
+    // Use this for initialization
+    void Start () {
+        p = false;
         currHealth = maxHealth;
         BossHealthSlider.maxValue = maxHealth;
         BossHealthSlider.value = maxHealth;
         anim = gameObject.GetComponent<Animator>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    { 
+    }
 
     public void AddDamge(float damage)
     {
@@ -33,6 +36,7 @@ public class BossHealth : MonoBehaviour {
     {
         Destroy(BossHealthCanvas);
         anim.SetBool("isDie", true);
+        gameObject.GetComponent<BossController>().enabled = false;
         Destroy(gameObject,3f);
     }
 }
