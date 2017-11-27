@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour {
+    public int numberofPlayer = 2;
     public bool bossActive = false;
-    public int numbersZombie = 1;
+    public int numbersZombie = 7;
+    GameObject GameOver;
     //variable for create items
     public GameObject newBoomsize, newMultiboom, newShoes;
     public Vector2 itemPosition;
@@ -15,7 +17,8 @@ public class GameController : MonoBehaviour {
     public GameObject YouWin, btnWin;
     // Use this for initialization
     void Start () {
-        numbersZombie = 1;
+        GameOver = GameObject.Find("You_lose");
+        GameOver.SetActive(false);
         bossActive = false;
         YouWin = GameObject.Find("You_win");
         btnWin = GameObject.Find("NEXT LEVEL");
@@ -25,6 +28,16 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if(player==null || numberofPlayer<=0)
+        {
+            allPlayersDie();
+        }
+        GameObject zombie = GameObject.FindGameObjectWithTag("zombie");
+        if(zombie==null)
+        {
+            bossCome();
+        }
         GameObject boss = GameObject.FindGameObjectWithTag("boss");
         if(boss==null)
         {
@@ -46,10 +59,10 @@ public class GameController : MonoBehaviour {
     public void zombieDie()
     {
         --numbersZombie;
-        if(numbersZombie<=0)
-        {
-            bossCome();
-        }
+        //if(numbersZombie<=0)
+        //{
+            //bossCome();
+        //}
     }
     void bossCome()
     {
@@ -72,5 +85,10 @@ public class GameController : MonoBehaviour {
         }
         createItem = false;
         timetoCreateItem = false;
+    }
+    public void allPlayersDie()
+    {
+        GameOver.SetActive(true);
+        Time.timeScale = 0;
     }
 }

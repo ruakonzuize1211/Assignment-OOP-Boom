@@ -23,20 +23,16 @@ public class player : MonoBehaviour {
     Transform rayUp1, rayRight1, rayDown1, rayLeft1, rayUp2, rayLeft2, rayDown2, rayRight2, rayUp, rayDown, rayLeft, rayRight;
     RaycastHit2D hitUp, hitUp1, hitUp2, hitDown, hitDown1, hitDown2, hitLeft, hitLeft1, hitLeft2, hitRight, hitRight1, hitRight2;
     public GameObject soundItem;
-    
-    GameObject GameOver;
     bool G;
     [SerializeField]
     void Start () {
         timetoMove = 4f;
         canMove = true;
         G = false;
-        GameOver = GameObject.Find("You_lose");
-        GameOver.SetActive(false);
-        /*text = "x " + nummberofHeart;
+        LifeTxt.text = "x " + nummberofHeart;
         BombTxt.text = "x " + Bomb;
         ShoeTxt.text = "x " + Shoe;
-        BSizeTxt.text = "x " + BSize;*/
+        BSizeTxt.text = "x " + BSize;
         speed = 2f;
         rayUp1 = transform.Find("rayUp1");
         rayRight1 = transform.Find("rayRight1");
@@ -246,8 +242,8 @@ public class player : MonoBehaviour {
     }
     void playerDie()
     {
-        GameOver.SetActive(true);
-        Time.timeScale = 0;
+        GameObject controller = GameObject.FindGameObjectWithTag("GameController");
+        controller.GetComponent<GameController>().allPlayersDie();
     }
     public void playerisHitted()
     {

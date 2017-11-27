@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class explosiveboom : MonoBehaviour
 {
-    bool canHitboss = true, canHitzombie = true, canhitShoes = true, canHitboomsize = true, canHitmultiboom = true, canHitrao = true, canhitPlayer = true, canhitCoveritems = true;
+    bool canHitboss = true, canHitzombie = true, canhitShoes = true, canHitboomsize = true, canHitmultiboom = true, canHitrao = true, canhitPlayer = true, canhitCoveritems = true, canhitPlayer1 = true, canhitPlayer2 = true;
     float x, y;
     Vector3 mid, midUp, midDown, midLeft, midRight;
     RaycastHit2D up, up1, up2, down, down1, down2, left, left1, left2, right, right1, right2;
@@ -55,11 +55,29 @@ public class explosiveboom : MonoBehaviour
             }
             for (int j = 0; j < 3; ++j)
             {
-                if (groupRaycast[i, j].collider != null && groupRaycast[i, j].transform.tag == "Player" && canhitPlayer)
+                if (groupRaycast[i, j].collider != null && groupRaycast[i, j].transform.tag == "Player")
                 {
-                    groupRaycast[i, j].transform.GetComponent<player>().playerisHitted();
-                    canhitPlayer = false;
-                    break;
+                    player p = groupRaycast[i, j].transform.GetComponent<player>();
+                    if (p != null && canhitPlayer)
+                    {
+                        groupRaycast[i, j].transform.GetComponent<player>().playerisHitted();
+                        canhitPlayer = false;
+                        break;
+                    }
+                    player1 p1 = groupRaycast[i, j].transform.GetComponent<player1>();
+                    if (p1 != null && canhitPlayer1)
+                    {
+                        groupRaycast[i, j].transform.GetComponent<player1>().playerisHitted();
+                        canhitPlayer1 = false;
+                        break;
+                    }
+                    player2 p2 = groupRaycast[i, j].transform.GetComponent<player2>();
+                    if (p2 != null && canhitPlayer2)
+                    {
+                        groupRaycast[i, j].transform.GetComponent<player2>().playerisHitted();
+                        canhitPlayer2 = false;
+                        break;
+                    }
                 }
             }
             for (int j = 0; j < 3; ++j)

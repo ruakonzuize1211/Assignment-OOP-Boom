@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class player2 : MonoBehaviour {
+    bool isActive = true;
     float timetoMove;
     bool canMove;
     public Text LifeTxt;
@@ -24,15 +25,13 @@ public class player2 : MonoBehaviour {
     RaycastHit2D hitUp, hitUp1, hitUp2, hitDown, hitDown1, hitDown2, hitLeft, hitLeft1, hitLeft2, hitRight, hitRight1, hitRight2;
     public GameObject soundItem;
     
-    GameObject GameOver;
+
     bool G;
     [SerializeField]
     void Start () {
         timetoMove = 4f;
         canMove = true;
         G = false;
-        GameOver = GameObject.Find("You_lose");
-        GameOver.SetActive(false);
         LifeTxt.text = "x " + nummberofHeart;
         BombTxt.text = "x " + Bomb;
         ShoeTxt.text = "x " + Shoe;
@@ -197,57 +196,59 @@ public class player2 : MonoBehaviour {
     // Update is called once per frame
 
     void Update () {
-        if(timetoMove>=3f)
+        if (isActive)
         {
-            canMove = true;
-        }
-        else
-        {
-            timetoMove += Time.deltaTime;
-        }
+            if (timetoMove >= 3f)
+            {
+                canMove = true;
+            }
+            else
+            {
+                timetoMove += Time.deltaTime;
+            }
 
-        if (canMove)
-        {
-            if (Input.GetKey("w"))
+            if (canMove)
             {
-                if (!stopUp1 && !stopUp2)
+                if (Input.GetKey("w"))
                 {
-                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
-                    transform.position -= Vector3.down * speed * Time.deltaTime;
-                }
+                    if (!stopUp1 && !stopUp2)
+                    {
+                        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                        transform.position -= Vector3.down * speed * Time.deltaTime;
+                    }
 
-            }
-            else if (Input.GetKey("s"))
-            {
-                if (!stopDown1 && !stopDown2)
-                {
-                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
-                    transform.position -= Vector3.up * speed * Time.deltaTime;
                 }
-            }
-            else if (Input.GetKey("d"))
-            {
-                if (!stopRight1 && !stopRight2)
+                else if (Input.GetKey("s"))
                 {
-                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
-                    transform.position -= Vector3.left * speed * Time.deltaTime;
+                    if (!stopDown1 && !stopDown2)
+                    {
+                        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                        transform.position -= Vector3.up * speed * Time.deltaTime;
+                    }
                 }
-            }
-            else if (Input.GetKey("a"))
-            {
-                if (!stopLeft1 && !stopLeft2)
+                else if (Input.GetKey("d"))
                 {
-                    gameObject.GetComponent<BoxCollider2D>().enabled = true;
-                    transform.position -= Vector3.right * speed * Time.deltaTime;
+                    if (!stopRight1 && !stopRight2)
+                    {
+                        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                        transform.position -= Vector3.left * speed * Time.deltaTime;
+                    }
                 }
+                else if (Input.GetKey("a"))
+                {
+                    if (!stopLeft1 && !stopLeft2)
+                    {
+                        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                        transform.position -= Vector3.right * speed * Time.deltaTime;
+                    }
+                }
+                Flip();
             }
-            Flip();
         }
     }
     void playerDie()
     {
-        GameOver.SetActive(true);
-        Time.timeScale = 0;
+        isActive = false;
     }
     public void playerisHitted()
     {
@@ -266,6 +267,8 @@ public class player2 : MonoBehaviour {
         if (nummberofHeart <= 0)
         {
             playerDie();
+            GameObject ctl = GameObject.FindGameObjectWithTag("GameController");
+            ctl.GetComponent<GameController>().numberofPlayer--;
         }
     }
     void hitBoomsize()

@@ -14,6 +14,7 @@ TagManager:
   - boomsize
   - multiboom
   - coverItems
+  - died
   layers:
   - Default
   - TransparentFX

@@ -18,7 +18,7 @@ public class ButtonBack : MonoBehaviour
 
         if (bt == ButtonBack.ButtonType.btnBack)
         {
-            SoundController.PlaySound(soundsGame.play);
+            
             SceneManager.LoadScene("game");
 
         }

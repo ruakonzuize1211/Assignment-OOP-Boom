@@ -17,7 +17,7 @@ public class YouWinBtn : MonoBehaviour {
         if (bt == YouWinBtn.ButtonType.btnNextLevel)
         {
 
-            SceneManager.LoadScene("SceMap2");
+            SceneManager.LoadScene("StoryMode");
 
         }
     }   

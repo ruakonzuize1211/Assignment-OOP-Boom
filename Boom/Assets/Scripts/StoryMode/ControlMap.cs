@@ -45,7 +45,7 @@ public class ControlMap : MonoBehaviour
         }
         if (Mathf.Abs(Map1.transform.position.x- x) <= 0.01 && Mathf.Abs(Map1.transform.position.y - y) <= 0.01 && Mathf.Abs(Map1.transform.position.z - z) <= 0.01)
         {
-            if (Input.GetKeyDown(KeyCode.KeypadEnter))
+            if (Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey("enter") || Input.GetKey(KeyCode.Return))
             {
                 SceneManager.LoadScene("SceMap1");
 
@@ -54,7 +54,7 @@ public class ControlMap : MonoBehaviour
         }
         if (Map2.transform.position.x <x1 && Map2.transform.position.x > -5.0)
         {
-            if (Input.GetKeyDown(KeyCode.KeypadEnter))
+            if (Input.GetKey(KeyCode.KeypadEnter) || Input.GetKey("enter") || Input.GetKey(KeyCode.Return))
             {
                 SceneManager.LoadScene("SceMap2");
 

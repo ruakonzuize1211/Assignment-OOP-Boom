@@ -38,6 +38,12 @@ public class BtnPlay : MonoBehaviour {
             Application.Quit();
 
         }
+        if (bt == BtnPlay.ButtonType.Guidebtn)
+        {
+            SoundController.PlaySound(soundsGame.exit);
+            SceneManager.LoadScene("Guide");
+
+        }
     }
     // Use this for initialization
     void Start () {
@@ -53,7 +59,8 @@ public class BtnPlay : MonoBehaviour {
         Playbtn,
         Optionbtn,
         Aboutbtn,
-        Exitbtn
+        Exitbtn,
+        Guidebtn
 
     }
 }

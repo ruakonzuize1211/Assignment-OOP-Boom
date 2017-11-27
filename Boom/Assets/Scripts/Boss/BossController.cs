@@ -76,6 +76,7 @@ public class BossController : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
+        Bomber = GameObject.FindGameObjectWithTag("Player");
         bossActive = controller.GetComponent<GameController>().bossActive;
         if(bossActive)
         {

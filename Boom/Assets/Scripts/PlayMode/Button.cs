@@ -31,7 +31,7 @@ public class Button : MonoBehaviour
         if (bt == Button.ButtonType.btnVS)
         {
             SoundController.PlaySound(soundsGame.play);
-            SceneManager.LoadScene("StoryMode");
+            SceneManager.LoadScene("VS mode");
 
         }
         if (bt == Button.ButtonType.btnLoad)

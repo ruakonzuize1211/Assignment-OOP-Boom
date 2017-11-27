@@ -28,4 +28,16 @@ EditorBuildSettings:
     guid: 5f2e28115b54a244686ea1845b3b757d
   - enabled: 1
     path: Assets/Scenes/StoryMode.unity
-    guid: 00000000000000000000000000000000
+    guid: ff909eb7400a1c544ac716a1428e6abe
+  - enabled: 1
+    path: Assets/Scenes/Guide.unity
+    guid: 6af3c22305d87bb4ba7171b6ea84d75d
+  - enabled: 1
+    path: Assets/Scenes/VS mode.unity
+    guid: 91e8aa79da3339549951cd2f026591cd
+  - enabled: 1
+    path: Assets/Scenes/mulMap1.unity
+    guid: 015e3fb63fcacaa47a6cfdc46ea74b46
+  - enabled: 1
+    path: Assets/Scenes/mulMap2.unity
+    guid: 49d24dd67574d3d46a69361056d0f00d

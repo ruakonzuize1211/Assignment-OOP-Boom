@@ -171,12 +171,13 @@ public class zombie : MonoBehaviour {
     }
     void Update()
     {
+        //mainPlayer = GameObject.FindGameObjectWithTag("Player");
         if (countTime > 180)
         {
             countTime = 0;
             repeatDirection = direction.multidir;
         }
-        Vector3 playerPosition = mainPlayer.transform.position;
+        //Vector3 playerPosition = mainPlayer.transform.position;
         if (Input.GetKey("up"))
         {
             if (!stopUp && !stopUp1 && !stopUp2 && repeatDirection!=direction.up)
