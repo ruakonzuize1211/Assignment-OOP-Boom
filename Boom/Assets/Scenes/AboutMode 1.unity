@@ -42,7 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 11
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
-    serializedVersion: 8
+    serializedVersion: 9
     m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
@@ -87,7 +87,7 @@ LightmapSettings:
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
   m_LightingDataAsset: {fileID: 0}
-  m_ShadowMaskMode: 2
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -323,11 +323,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4143526662405768, guid: 1c04f618399a4be4597c709f18ad0732, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -11.96
+      value: -8.84
       objectReference: {fileID: 0}
     - target: {fileID: 4143526662405768, guid: 1c04f618399a4be4597c709f18ad0732, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4.07
+      value: 3.84
       objectReference: {fileID: 0}
     - target: {fileID: 4143526662405768, guid: 1c04f618399a4be4597c709f18ad0732, type: 2}
       propertyPath: m_LocalPosition.z
@@ -415,6 +415,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!4 &2060012655
 Transform:
   m_ObjectHideFlags: 0
@@ -422,8 +423,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2060012653}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.13, z: 0}
-  m_LocalScale: {x: 2.8, y: 1.7, z: 1.5}
+  m_LocalPosition: {x: 0.006, y: 0.014, z: 0}
+  m_LocalScale: {x: 2.2120893, y: 1.6613028, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1

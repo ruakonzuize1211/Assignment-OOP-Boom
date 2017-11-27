@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 114807627501184550}
   - component: {fileID: 82976694919242162}
   m_Layer: 0
-  m_Name: boomforboss
+  m_Name: boomforBoss
   m_TagString: Obstacles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -574,3 +574,4 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
